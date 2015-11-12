@@ -1,0 +1,44 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="taskDocumentation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="replanningAnnotation" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element	type="xs:string"	name="source" 				minOccurs="0" 	maxOccurs="1"/>
+              <xs:element	type="xs:string"	name="destination" 			minOccurs="0" 	maxOccurs="1"/>
+              <xs:element	type="xs:boolean"	name="isRollbackable" 		minOccurs="0" 	maxOccurs="1"/>
+              <xs:element	type="xs:boolean"	name="isConfirmationTask" 	minOccurs="0" 	maxOccurs="1"/>
+              <xs:element	type="xs:string" 	name="compensatoryTask" 	minOccurs="0" 	maxOccurs="1"/>
+              <xs:element	type="xs:string" 	name="confirmationTask" 	minOccurs="0" 	maxOccurs="1"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="queryAnnotation" minOccurs="0" maxOccurs="1" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="query" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="queryText"/>
+                    <xs:element type="xs:string" name="eventType"/>
+                    <xs:element name="scope">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="startTask" 	type="xs:string" />
+                          <xs:element name="endTask" 	type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+						  <xs:element name="roles" 		type="xs:string" minOccurs="0"/>		
+                        </xs:sequence>
+                        <xs:attribute type="xs:boolean" name="trigger"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="PTVRouteCoordinate.xsd" targetNamespace="PTVRouteCoordinate.xsd" elementFormDefault="qualified">
+    <xs:element name="PTVRouteCoordinateEvent">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="routeName" type="xs:string"/>
+                <xs:element name="section" type="xs:string"/>
+                <xs:element name="index" type="xs:integer"/>
+                <xs:element name="latitude" type="xs:double"/>
+                <xs:element name="longitude" type="xs:double"/>
+                <xs:element name="start" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

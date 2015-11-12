@@ -1,0 +1,14 @@
+<hlayout sclass="footer">
+<!--  
+	<div hflex="1" vflex="1" align="center">
+		<include src="/gui/calendar.zul"/>
+	</div>
+-->
+	<div hflex="1" vflex="1" align="center">
+		<vbox align="center">
+			Prototype of FP-7 GET Service Project.
+			<a href="http://www.getservice-project.eu">More info</a>
+		</vbox>
+	</div>
+
+</hlayout>

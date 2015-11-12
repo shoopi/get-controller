@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="scenario34" name="My process" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="usertask1" name="Reserve Capacity on Train">
+      <documentation>&lt;taskDocumentation&gt;
+&lt;queryAnnotation&gt;
+	&lt;query&gt;
+		&lt;queryText&gt;Select eta, timestamp, latitude, longitude, vehicleId, nodeDeadline, source, caseId from TransportationAtRisk(caseId=$caseId)&lt;/queryText&gt;
+		&lt;eventType&gt;TransportationAtRisk&lt;/eventType&gt;
+		&lt;scope trigger="false"&gt;
+			&lt;startTask&gt;usertask1&lt;/startTask&gt;
+			&lt;endTask&gt;usertask4&lt;/endTask&gt;
+			&lt;roles&gt;admin&lt;/roles&gt;
+		&lt;/scope&gt;
+	&lt;/query&gt;
+&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+      <extensionElements>
+        <activiti:formProperty id="trainId" name="Train Identifier" type="long" required="true"></activiti:formProperty>
+        <activiti:formProperty id="eta" name="Estimated Arrival Time" type="date" datePattern="yyyy-MM-dd'T'HH:mm:ss"></activiti:formProperty>
+        <activiti:formProperty id="deadline" name="Latest Arrival time" type="date" datePattern="yyyy-MM-dd'T'HH:mm:ss"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="usertask1"></sequenceFlow>
+    <userTask id="usertask2" name="Reserve Truck">
+      <extensionElements>
+        <activiti:formProperty id="truckId" name="Truck Identifier" type="long" required="true"></activiti:formProperty>
+        <activiti:formProperty id="eta" name="Estimated Arrival Time" type="date" datePattern="yyyy-MM-dd'T'HH:mm:ss"></activiti:formProperty>
+        <activiti:formProperty id="deadline" name="Latest Arrival Time" type="date" datePattern="yyyy-MM-dd'T'HH:mm:ss"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow2" sourceRef="usertask1" targetRef="usertask2"></sequenceFlow>
+    <userTask id="usertask3" name="Drive To Station">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;queryAnnotation&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;Select  operatorId, timestamp, mode, distance, duration, startTime, speed, currentLatitude, currentLongitude,  previousLatitude, previousLongitude from PositionUpdate(operatorId=$truckId)&lt;/queryText&gt;
+			&lt;eventType&gt;PositionUpdate &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask3&lt;/startTask&gt;
+				&lt;endTask&gt;usertask3&lt;/endTask&gt;
+				&lt;roles&gt;admin,driver&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;Select  operatorId, timestamp, source, predictedLength, predictedDelay, latitude, longitude from CongestionAhead(operatorId=$truckId)&lt;/queryText&gt;
+			&lt;eventType&gt;CongestionAhead&lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask3&lt;/startTask&gt;
+				&lt;endTask&gt;usertask3&lt;/endTask&gt;
+				&lt;roles&gt;admin,driver&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;
+&lt;query&gt;
+		&lt;queryText&gt;Select operatorId, timestamp, currentLatitude, currentLongitude, mode from PositionUpdate (mode='rail',operatorId=$trainId)&lt;/queryText&gt;
+		&lt;eventType&gt;PositionUpdate&lt;/eventType&gt;
+		&lt;scope trigger="false"&gt;
+			&lt;startTask&gt;usertask3&lt;/startTask&gt;
+			&lt;endTask&gt;usertask4&lt;/endTask&gt;
+			&lt;roles&gt;admin&lt;/roles&gt;
+		&lt;/scope&gt;
+	&lt;/query&gt;
+	&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow3" sourceRef="usertask2" targetRef="usertask3"></sequenceFlow>
+    <userTask id="usertask4" name="Take Train"></userTask>
+    <sequenceFlow id="flow4" sourceRef="usertask3" targetRef="usertask4"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow5" sourceRef="usertask4" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_scenario34">
+    <bpmndi:BPMNPlane bpmnElement="scenario34" id="BPMNPlane_scenario34">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="240.0" y="320.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="320.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="470.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask3" id="BPMNShape_usertask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="620.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask4" id="BPMNShape_usertask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="770.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="920.0" y="320.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="275.0" y="337.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="337.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="425.0" y="337.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="337.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="575.0" y="337.0"></omgdi:waypoint>
+        <omgdi:waypoint x="620.0" y="337.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="725.0" y="337.0"></omgdi:waypoint>
+        <omgdi:waypoint x="770.0" y="337.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="875.0" y="337.0"></omgdi:waypoint>
+        <omgdi:waypoint x="920.0" y="337.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

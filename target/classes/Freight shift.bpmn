@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <collaboration id="Collaboration">
+    <participant id="prototypeV1" name="Freight Shift Scenario" processRef="Freight_Shift_Scenario"></participant>
+  </collaboration>
+  <process id="Freight_Shift_Scenario" name="Freight Shift Scenario" isExecutable="true">
+    <laneSet id="laneSet_Freight_Shift_Scenario">
+      <lane id="Consignment" name="Consignment">
+        <flowNodeRef>usertask4</flowNodeRef>
+        <flowNodeRef>usertask5</flowNodeRef>
+        <flowNodeRef>usertask7</flowNodeRef>
+        <flowNodeRef>usertask8</flowNodeRef>
+        <flowNodeRef>endevent4</flowNodeRef>
+      </lane>
+      <lane id="Planner" name="Planner">
+        <flowNodeRef>startevent1</flowNodeRef>
+        <flowNodeRef>usertask9</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="startevent1" name="Start">
+      <extensionElements>
+        <activiti:formProperty id="truckId" name="truckId" type="string"></activiti:formProperty>
+      </extensionElements>
+    </startEvent>
+    <userTask id="usertask4" name="Drive to pick-up airfreight">
+      <documentation>&lt;taskDocumentation&gt;
+&lt;queryAnnotation&gt;
+&lt;!--&lt;query&gt; 
+    &lt;queryText&gt;SELECT flightId, departure.origin, departure.departurelatitude, departure.departurelongitude, arrival.destination, arrival.arrivallatitude, arrival.arrivallongitude, timestamp, aircraftId, flightNumber, latitude, longitude, speed, bearing, altitude FROM  Flighttrace where aircraftId=24980875&lt;/queryText&gt; 
+ &lt;eventType&gt;Flighttrace &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask4&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+&lt;/query&gt; --&gt;  
+&lt;query&gt; 
+      &lt;queryText&gt;SELECT type,timestamp,description,url,title,latitude,longitude, $caseId as caseId FROM Warning where type="strike" and description like "%Frankfurt%"&lt;/queryText&gt; 
+ &lt;eventType&gt;Warning&lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask4&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask4&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;!--&lt;query&gt; 
+    &lt;queryText&gt;SELECT flightId, timestamp, aircraftId, latitude, longitude, $caseId as caseId FROM  FlightDiversionDetectedShort where aircraftId=24980875&lt;/queryText&gt; 
+ &lt;eventType&gt;FlightDiversionDetectedShort&lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask4&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+--&gt;
+&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <userTask id="usertask5" name="Load airfreight"></userTask>
+    <sequenceFlow id="flow8" sourceRef="usertask4" targetRef="usertask5"></sequenceFlow>
+    <userTask id="usertask7" name="Drive to destination">
+      <documentation>&lt;taskDocumentation&gt;
+&lt;queryAnnotation&gt; 
+ &lt;query&gt; 
+    &lt;queryText&gt;Select  operatorId, timestamp, distance, duration, startTime, speed, currentLatitude, currentLongitude,  previousLatitude, previousLongitude from PositionUpdate(operatorId=$truckId)&lt;/queryText&gt; 
+    &lt;eventType&gt;PositionUpdate &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;query&gt; 
+    &lt;queryText&gt;Select  latitude, longitude, nodeId, nodeName, operatorId, timestamp from ArrivedAtTransportNode(operatorId=$truckId)&lt;/queryText&gt; 
+ &lt;eventType&gt;ArrivedAtTransportNode &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;query&gt; 
+    &lt;queryText&gt;  Select operatorId, latitude, longitude, distanceRemaining, distanceCovered, timeElapsed, timeRemaining, timestamp from TransportProgress(operatorId=$truckId) &lt;/queryText&gt; 
+ &lt;eventType&gt; TransportProgress &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;query&gt; 
+    &lt;queryText&gt;Select latitude, longitude, nodeId, nodeName, operatorId, timestamp From StartedFromTransportNode(operatorId=$truckId)&lt;/queryText&gt; 
+ &lt;eventType&gt; StartedFromTransportNode &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow10" sourceRef="usertask5" targetRef="usertask7"></sequenceFlow>
+    <userTask id="usertask8" name="Unload airfreight"></userTask>
+    <sequenceFlow id="flow11" sourceRef="usertask7" targetRef="usertask8"></sequenceFlow>
+    <endEvent id="endevent4" name="End"></endEvent>
+    <sequenceFlow id="flow36" sourceRef="usertask8" targetRef="endevent4"></sequenceFlow>
+    <userTask id="usertask9" name="Start Monitoring"></userTask>
+    <sequenceFlow id="flow37" sourceRef="startevent1" targetRef="usertask9"></sequenceFlow>
+    <sequenceFlow id="flow38" sourceRef="usertask9" targetRef="usertask4"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
+      <bpmndi:BPMNShape bpmnElement="prototypeV1" id="BPMNShape_prototypeV1">
+        <omgdc:Bounds height="431.0" width="1031.0" x="20.0" y="10.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Consignment" id="BPMNShape_Consignment">
+        <omgdc:Bounds height="251.0" width="1031.0" x="20.0" y="10.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Planner" id="BPMNShape_Planner">
+        <omgdc:Bounds height="180.0" width="1031.0" x="20.0" y="261.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="60.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask4" id="BPMNShape_usertask4">
+        <omgdc:Bounds height="65.0" width="105.0" x="430.0" y="125.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask5" id="BPMNShape_usertask5">
+        <omgdc:Bounds height="55.0" width="105.0" x="580.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask7" id="BPMNShape_usertask7">
+        <omgdc:Bounds height="55.0" width="131.0" x="720.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask8" id="BPMNShape_usertask8">
+        <omgdc:Bounds height="55.0" width="105.0" x="880.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent4" id="BPMNShape_endevent4">
+        <omgdc:Bounds height="35.0" width="35.0" x="1010.0" y="140.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask9" id="BPMNShape_usertask9">
+        <omgdc:Bounds height="55.0" width="105.0" x="140.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="535.0" y="157.0"></omgdi:waypoint>
+        <omgdi:waypoint x="580.0" y="157.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="685.0" y="157.0"></omgdi:waypoint>
+        <omgdi:waypoint x="720.0" y="157.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="851.0" y="157.0"></omgdi:waypoint>
+        <omgdi:waypoint x="880.0" y="157.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow36" id="BPMNEdge_flow36">
+        <omgdi:waypoint x="985.0" y="157.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1010.0" y="157.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow37" id="BPMNEdge_flow37">
+        <omgdi:waypoint x="95.0" y="317.0"></omgdi:waypoint>
+        <omgdi:waypoint x="140.0" y="317.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow38" id="BPMNEdge_flow38">
+        <omgdi:waypoint x="192.0" y="290.0"></omgdi:waypoint>
+        <omgdi:waypoint x="482.0" y="190.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

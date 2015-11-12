@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WarningEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="Warning.xsd">
+  <type>strike</type>
+  <timestamp>2014-03-27T12:12:12</timestamp>
+  <description>Lufthansa hat begonnen, am Donnerstag, 27.03.2014 zahlreiche Inlands- und Europaverbindungen zu streichen. Eine Streikankündigung von ver.di für die Frühschicht an zahlreichen deutschen Flughäfen wird den Flugplan erheblich durcheinander wirbeln.  Links und Hilfe zum Thema Flugstatus online checken Airlinerufnummern   Internetseite Frankfurt-Rhein-Main Flughafen aktuelle Infos der Lufthansa  Umbuchungen / Erstattungen Umbuchungen direkt bei Ihrer Airline oder Ihrer Buchungsstelle [...]</description>
+  <url>http://www.streikradar.de/27-03-2014-verdi-warnstreiks-an-deutschen-flughafen</url>
+  <title>27.03.2014 Verdi-Warnstreiks an deutschen Flughäfen</title>
+  <latitude>50.1415926535</latitude>
+  <longitude>8.1415926535</longitude>
+</WarningEvent>

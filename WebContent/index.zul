@@ -1,0 +1,22 @@
+<?init class="main.java.nl.tue.ieis.get.activiti.config.ActivitiEngineConfig"?>
+<?page id="GETServiceController" title="GET Service Controller" cacheable="true" automaticTimeout="false"?>
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<?link href="/imgs/favicon.ico" rel="shortcut icon" type="image/x-icon" ?>
+<zk xmlns:w="client">
+	<borderlayout hflex="1" vflex="1" >
+		<north height="130px" border="none">
+			<include src="/gui/banner.zul"/>
+		</north>
+		<west width="260px" border="none" collapsible="true" splittable="true" minsize="150" title="Case Handler">
+			<include src="/gui/sidebar.zul"/>
+		</west>
+		<center id="mainContent" autoscroll="true">
+			<include src="/gui/main.zul"/>
+		</center>
+		<south height="50px" border="none" collapsible="true" >
+			<div>
+				 <include src="/gui/footer.zul"/>
+			</div>
+		</south>
+	</borderlayout>
+</zk>

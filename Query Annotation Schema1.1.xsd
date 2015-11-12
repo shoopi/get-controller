@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+ <xsd:element name="queryAnnotation"> 
+   <xsd:complexType> 
+     <xsd:sequence> 
+       <xsd:element  minOccurs="0" maxOccurs="unbounded" name="query"> 
+       <xsd:complexType> 
+        <xsd:sequence> 
+         <xsd:element name="queryText" type="xsd:string" /> 
+   <xsd:element name="eventType" type="xsd:string" />
+         <xsd:element name="scope"> 
+         <xsd:complexType> 
+           <xsd:sequence> 
+             <xsd:element name="startTask" type="xsd:string" /> 
+             <xsd:element minOccurs="0" maxOccurs="unbounded" name="endTask" type="xsd:string" />
+			 <xsd:element name="roles" type="xsd:string" />			 
+           </xsd:sequence> 
+           <xsd:attribute name="trigger" type="xsd:boolean" /> 
+         </xsd:complexType> 
+       </xsd:element> 
+        </xsd:sequence> 
+       </xsd:complexType> 
+       </xsd:element> 
+     </xsd:sequence> 
+   </xsd:complexType> 
+ </xsd:element> 
+</xsd:schema>

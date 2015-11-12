@@ -1,0 +1,363 @@
+<zk xmlns:w="client">
+<div hflex="1" vflex="1" id="bannerWin" apply="main.java.nl.tue.ieis.get.control.BannerController">
+	<menubar id="menubar" width="100%" style="border-radius: 7px 7px 0 0;">
+		<menu label="Admin">
+				<menupopup id="topAdminMenu" >
+			        <menuitem image="/imgs/up.png" label="Upload Specification" upload="true" id="uploadTop"/>
+			        <menuseparator />
+			        <menuitem image="/imgs/add.png" label="Add Transport Order" id="addTop"/>
+			        <menuitem image="/imgs/multiple.png" label="Plan Multiple Transportation" id="multilpeTransTop" />
+			        <menuseparator />
+			        <menuitem image="/imgs/del.png" label="Remove Transport Order" onClick="alert(self.label)" id="removeTop"/>
+			        <menuitem image="/imgs/update.png" label="Update Transport Plan" id="updateTop"/>
+		        </menupopup>
+		</menu>
+		<menu label="Info">
+			<menupopup id="topInfoMenu" >
+				<menuitem image="/imgs/traffic.png" label="Traffic Jam" id="showTrafficInfo"/>
+			</menupopup>
+		</menu>
+		<menu label="Settings">
+			<menupopup id="topSettingInfo" >
+				<menuitem image="/imgs/setting.png" label="Configure Event Engine" id="configEventEngine"/>
+				<menuitem image="/imgs/thumb.png" label="Realse Suspended Assets" id="releaseAsset"/>
+			</menupopup>
+		</menu>
+		<menu label="About">
+			<menupopup id="topAboutMenu" >
+				<menuitem image="/imgs/version.png" label="Version" onClick='alert("GET Service Controller \n version 1.0")'/>
+				<menuitem image="/imgs/license.png" label="License" onClick="alert(self.label)"/>
+			</menupopup>
+		</menu>
+	</menubar>
+	<div sclass="banner">
+		<hbox hflex="1" vflex="1" align="center">
+			<a href="http://getservice-project.eu/">
+				<image src="/imgs/GET2.png" width="40px" height="80px" />
+			</a>
+			<vbox width="500px">
+				<label value="GET Controller" sclass="banner-head" />
+				<label value="SERVICE" sclass="banner-head-lit" />
+			</vbox>
+			<hbox hflex="1" vflex="1" pack="end" align="end">
+				<button id="returnBtn" label="Back To Main Page" image="/imgs/back-blue.png" hoverImage="/imgs/back-green.png" visible="false" sclass="myButton" style="margin-bottom: 15px;"/>
+				<image id="userPic" src="/imgs/admin.png" style="cursor:pointer"/>
+				<vlayout>
+					<button id="initLoginBtn" label="Login" image="/imgs/login.png" sclass="myButton" style="width: 190px;"/>
+					<button id="initRegBtn" label="Register" image="/imgs/register.png" sclass="myButton"  style="width: 190px;"/>
+					<button id="logoutBtn" label="Logout"  image="/imgs/logout.png" visible="false" sclass="myButton"  style="width: 190px;"/>
+					<div id="userInfo" visible="false">
+	   				<label id="userLabel" context="adminPicRC" style="color:#c0c0c0; font-family:arial; font-size:14px; font-weight:bold;"/>
+					<menupopup id="adminPicRC">
+				        <menuitem image="/imgs/up.png" label="Upload Specification" id="uploadBottom"/>
+				        <menuseparator />
+				        <menuitem image="/imgs/add.png" label="Add Transport Order"  id="addBottom" popup="createOrderPopup"/>
+				        <menuitem image="/imgs/del.png" label="Remove Transport Order" id="removeButtom"/>
+			        </menupopup>
+		        </div>
+				</vlayout>
+			</hbox>
+		</hbox>
+		<timer delay="1000" id="userTimer" repeats="true"/>
+	</div>
+	
+	<window id="loginWin" title="Login to GET Service" width="450px" visible="false" sizable="true" closable="true" border="normal" apply="main.java.nl.tue.ieis.get.control.LoginController">
+		<caption image="/imgs/login.png" label="Login Form"/>
+        <grid sclass="loginGrid">
+            <columns>
+                <column hflex="1" />
+                <column hflex="2" />
+            </columns>
+            <rows>
+                <row>Username <textbox id="usernameLoginTextbox" constraint="no empty"	hflex="1" vflex="1"/></row>
+                <row>Password <textbox id="passwordLoginTextbox" constraint="no empty"	hflex="1" vflex="1" type = "password"/></row>
+               	<row>Scope				
+					<combobox id="scopeCombobox2" visible="true" tooltiptext="Select Scope" readonly="true" sclass="myCombobox" hflex="1" vflex="1">
+						<comboitem id="getCPMComboItem2" 		label="Global GET CPM Component"/>
+						<comboitem id="getControllerComboItem2" 	label="Local GET Controller"/>
+						<attribute name="onCreate">
+							self.setSelectedIndex(0);
+						</attribute>
+					</combobox>
+				</row>
+                <row>
+                	<cell sclass="loginCtl" colspan="2">
+	                	<vlayout>
+	                    	<button id="loginBtn" label="Login" sclass="myButton"/>
+	                    	<label id="loginMsgLabel" />
+	                	</vlayout>
+                	</cell>
+                </row>
+            </rows>
+        </grid>
+    </window>
+
+    <window id="regWin" title="Register to GET Service" width="520px" style="max-height:500px; overflow-y:scroll; padding:10px; margin:10px;" visible="false" closable="true" border="normal" apply="main.java.nl.tue.ieis.get.control.LoginController">
+        <caption image="/imgs/register.png" label="Registration Form"/>
+        <grid sclass="registerGrid">
+            <columns>
+                <column hflex="1" />
+                <column hflex="2" />
+            </columns>
+            <rows>
+                <row>User Name			<textbox id="usernameTextbox"  	constraint="no empty" 	hflex="1" vflex="1"/></row>
+                <row>Password			<textbox id="passwordTextbox"  	constraint="no empty"	hflex="1" vflex="1" type = "password"/></row>
+                <row>First Name			<textbox id="firstnameTextbox" 	constraint="no empty"	hflex="1" vflex="1"/></row>
+                <row>Last Name			<textbox id="lastnameTextbox"  	constraint="no empty"	hflex="1" vflex="1"/></row>
+                <row>Organization ID	<hlayout>
+                							<spinner id="org_idSpinner" 	constraint="no negative,min 0" />
+                							<button id="addNewOrg" label="Add Organization" sclass="myButton"/>
+                						</hlayout> 
+                </row>
+                <row>Roles				<combobox id="rolesCombobox" visible="true" tooltiptext="Select Role" readonly="true" sclass="myCombobox" 	hflex="1" vflex="1">
+						<comboitem id="adminComboItem" 	label="Admin" value="admin"/>
+						<comboitem id="driverComboItem" label="Driver" value="driver" />
+						<attribute name="onCreate">
+							self.setSelectedIndex(0);
+						</attribute>
+					</combobox>
+				</row>
+				<row>Scope				
+					<combobox id="scopeCombobox" visible="true" tooltiptext="Select Scope" readonly="true" sclass="myCombobox" 	hflex="1" vflex="1">
+						<comboitem id="getCPMComboItem" 		label="Global GET CPM Component"/>
+						<comboitem id="getControllerComboItem" 	label="Local GET Controller"/>
+						<attribute name="onCreate">
+							self.setSelectedIndex(0);
+						</attribute>
+					</combobox>
+				</row>
+                <row><cell sclass="regButton" colspan="2"><vlayout>
+                    <button id="regBtn" label="Register User" sclass="myButton"/>
+                    <label id="regMsgLabel" />
+                </vlayout></cell></row>
+            </rows>
+        </grid>
+    </window>
+    
+    <window id="regOrgWin" title="Register New Organization" width="480px" style="max-height:500px; overflow-y:scroll; padding:10px; margin:10px;" visible="false" closable="true" border="normal">
+        <caption image="/imgs/register.png" label="Organization Registration Form"/>
+        <grid sclass="registerOrgGrid">
+            <columns>
+                <column hflex="1" />
+                <column hflex="2" />
+            </columns>
+            <rows>
+                <row>Organization Shortname	<textbox id="orgShortnameTextbox"  	constraint="no empty"	hflex="1" vflex="1"/></row>
+                <row>Organization Fullname	<textbox id="orgFullnameTextbox"  	constraint="no empty"	hflex="1" vflex="1"/></row>
+                <row>Organization Email		<textbox id="orgEmailTextbox" 		constraint="no empty"	hflex="1" vflex="1"/></row>
+                <row>User Name				<textbox id="usernameTextbox2"  	disabled="true"			hflex="1" vflex="1"/></row>
+                <row>Password				<textbox id="passwordTextbox2"  	disabled="true"			hflex="1" vflex="1" type = "password"/></row>
+                <row>First Name				<textbox id="firstnameTextbox2" 	disabled="true"			hflex="1" vflex="1"/></row>
+                <row>Last Name				<textbox id="lastnameTextbox2" 		disabled="true"			hflex="1" vflex="1"/></row>
+                <row>Role					<textbox id="roleTextbox2" 			disabled="true"			hflex="1" vflex="1"/> </row>
+        		<row>
+        			<cell id="regOrgCell" sclass="regButton" colspan="2">
+        				<vlayout>
+                    		<button id="regOrgBtn" label="Register Organization and User" sclass="myButton"/>
+                   		 	<label id="regOrgMsgLabel" />
+               			</vlayout>
+              		</cell>
+              	</row>
+            </rows>
+        </grid>
+    </window>
+    
+    <window id="trafficWin" width="650px" position="left,top" title="Traffic Info" visible="false" closable="true" border="normal"  sizable="true" tooltiptext="Traffic"
+    	style="min-height:200px; max-height:500px; overflow:scroll; padding:10px; margin:10px;" apply="main.java.nl.tue.ieis.get.control.TrafficWindowController">
+    	<caption image="/imgs/traffic.png" label="Live Data"/>
+    	<listbox id="trafficListbox" emptyMessage="No Traffic Detected" checkmark="true" multiple="true" mold="paging" pageSize="4">
+			<listhead>
+				<listheader width="32px" />
+		    	<listheader label="Type" width="50px"/>
+                <listheader label="Provider" width="65px"/>
+                <listheader label="Description" width="270px"/>
+                <listheader label="Delay" width="45px"/>
+                <listheader label="Magnitude" width="70px"/>
+                <listheader label="Roads Affected" width="100px"/>
+                <listheader label="Area Center" width="120px"/>
+			</listhead>
+			<template name="model">
+				<listitem style="cursor:pointer">
+					<listcell />
+			        <listcell label="${each.type}"></listcell>
+			        <listcell label="${each.provider}"></listcell>
+			        <listcell label="${each.description}"></listcell>
+			        <listcell label="${each.delay}"></listcell>
+			        <listcell label="${each.magnitude}"></listcell>
+			        <listcell label="${each.roadsAffected}"></listcell>
+			        <listcell label="(${each.areaCenter.latitude}, ${each.areaCenter.longitude})"></listcell>
+			    </listitem>
+			</template>
+		</listbox>
+		<!--  <button label="Show On Map" id="trafficBtn"/> -->
+		<timer id="trafficTimer" delay="2000" onClientInfo="self.start()" repeats="true"/>
+    </window>
+    
+    <window apply="main.java.nl.tue.ieis.get.control.TransportCaseController" id="addWindows" title="Create a new Transportation Order" onClose="self.setVisible(false);" width="730px" border="normal" closable="true">
+		<caption image="/imgs/transportOrder.png"/>
+		<tabbox id="tabbox">
+		    <tabs id="tabs">
+		        <tab id="tpOrder1" label="Transport Order1" closable="false"/>
+		        <tab id="addTab" image="/imgs/add-tab.png" closable="false"/>
+		    </tabs>
+		    <tabpanels id="tabpanels">
+		        <tabpanel id="tabpanel"/>
+		    </tabpanels>
+		</tabbox>
+  		<vlayout style="margin:10px auto; padding 10px;">
+  			<hlayout style="padding 15px;">
+  				<button id="findAddressButton" label="Add Order And Plan" sclass="myButton" image="/imgs/address.png"/>
+  				<button id="addMultipleButton" label="Add Order(s)" sclass="myButton" image="/imgs/multiple.png"/>
+   				<combobox id="scenarioCombobox" visible="true" tooltiptext="Select Scenario" readonly="true" sclass="myCombobox">
+					<comboitem id="ptvServerComboItem" label="Other Request" value="Other Request" />
+					<comboitem id="exportComboItem1" label="Export Case Scenario (1)" value="Export Case Scenario (1)"/>
+					<comboitem id="exportComboItem2" label="Export Case Scenario (2)" value="Export Case Scenario (2)"/>
+					<comboitem id="freightShiftComboItem1" label="Freight Shift Scenario (1)" value="Freight Shift Scenario (1)"/>
+					<comboitem id="freightShiftComboItem2" label="Freight Shift Scenario (2)" value="Freight Shift Scenario (2)"/>
+					<comboitem id="inlandWaterwayComboItem1" label="Inland Waterway Scenario (1)" value="Inland Waterway Scenario (1)" />
+					<comboitem id="inlandWaterwayComboItem2" label="Inland Waterway Scenario (2)" value="Inland Waterway Scenario (2)" />
+					<comboitem id="inlandWaterwayComboItem3" label="Inland Waterway Scenario (3)" value="Inland Waterway Scenario (3)" />
+					<comboitem id="inlandWaterwayComboItem4" label="Inland Waterway Scenario (4)" value="Inland Waterway Scenario (4)" />
+					<comboitem id="inlandWaterwayComboItem_replanning2" label="Inland Waterway (Replanning)" value="Inland Waterway (Replanning)" />
+					
+					<attribute name="onCreate">
+						self.setSelectedIndex(0);
+					</attribute>
+				</combobox>
+				<checkbox id="ptvNewServerCheckbox" label="PTV Server" checked="true" style="color:#888888; font-family:arial; font-size:13px; font-weight:bold;"/>
+ 			</hlayout>
+ 			<label id="errorLabel" style="color:red; weight: bold;" />
+ 		</vlayout>
+		<timer id="timer" delay="1000" onClientInfo="self.start()" repeats="true"/>
+	</window>
+		
+	<window apply="main.java.nl.tue.ieis.get.control.UpdateCaseController" id="updateWin" title="Update Case" width="600px" border="normal" closable="true">
+		<caption image="/imgs/update.png"/>
+		<grid id="terminateCaseGrid">
+			<columns>
+				<column label="Select" width="50px"/>
+				<column label="Case" width="100px"/>
+				<column label="Reason"/>
+			</columns>
+			<rows></rows>
+		</grid>
+		<grid>
+			<columns>
+				<column width="220px"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<button label="Update Transport Plan" id="updateRouteBtn" disabled="true" sclass="myButton" style="font-size:15px; padding:6px 20px;"/>
+					<label id="routeLbl" value="no route has been selected."/>
+				</row>
+				<row>
+					<label value="Add compensatory tasks to: "/>
+					<combobox id="addCompTaskCombobox" readonly="true" disabled="true">
+						<comboitem id="add2StartComboItem" value="Whole Proccess" label="Whole Proccess"/>
+						<comboitem id="add2RunningComboItem" value="Running Tasks" label="Running Tasks"/>
+						<attribute name="onCreate">
+							self.setSelectedIndex(0);
+						</attribute>
+					</combobox>
+				</row>
+				<row>
+					<label>Upload File</label>
+					<button label="Update Transport Process" id="updateProcessBtn" disabled="true" upload="true" sclass="myButton" style="font-size:14px; padding:6px 10px;"/>
+				</row>
+				<row>
+					<label>Search Repository</label>
+					<hlayout>
+						<combobox tabindex="1" id="processComboBox" width="230px" mold="rounded" autodrop="true" readonly="true">
+	           				<template name="model">
+	   							<comboitem label="${each}" />
+							</template>
+	           			</combobox>
+	           			<separator />
+	           			<button label="" id="refreshRepositoryBtn" disabled="false" image="/imgs/update.png" />
+	           			<button label="" id="deployProcessFromRepositoryBtn" disabled="true" image="/imgs/play.png" />
+           			</hlayout>
+				</row>
+				<row spans="2">
+					<button label="Remove Case" id="removeTransportBtn"  disabled="true" sclass="myButton" style="padding:6px 40px;"/>
+				</row> 
+			</rows>
+		</grid>
+	</window>
+	
+	<window apply="main.java.nl.tue.ieis.get.control.EventEngineController" id="configEventEngineWin" title="Configure Event Engine" width="350px" border="normal" closable="true">
+		<caption image="/imgs/setting.png"/>
+			<vlayout>
+	    		<hlayout style="padding 15px;">
+		    		<combobox id="eventEngineCombobox" visible="true" tooltiptext="Select Event Engine" readonly="true" sclass="myCombobox" style="width: 300px;">
+						<comboitem id="hpiEngine" label="HPI GETAggregationWebService" value="http://bpt.hpi.uni-potsdam.de/GETAggregationWebService" style="color:black; weight: bold;"/>
+						<comboitem id="hpiEngine2" label="HPI GETPredictionReceiver" value ="http://bpt.hpi.uni-potsdam.de/GETPredictionReceiver"/>
+						<comboitem id="hpiEngine3" label="HPI GETScenario3" value ="http://bpt.hpi.uni-potsdam.de/GETScenario3"/>
+						<comboitem id="local8585" label="131.155.120.245:8585" value="http://131.155.120.245:8585"/>
+						<comboitem id="local6411" label="islab1.ieis.tue.nl:6411" value="http://islab1.ieis.tue.nl:6411"/>
+						<comboitem id="local8081" label="localhost:8081" value="http://localhost:8081"/>
+						<comboitem id="freeTextEngine" label="Enter an Endpoint Manually" value="http://bpt.hpi.uni-potsdam.de/GETAggregationWebService"/>
+						<attribute name="onCreate">
+							self.setSelectedIndex(0);
+						</attribute>
+					</combobox>
+	   			</hlayout>
+	   			<button id="eventEngineBtn" label="Connect" sclass="myButton" image="/imgs/event.png"/>
+	   			<label id="errorLblEventEngine" style="color:red; weight: bold;" />
+	   		</vlayout>
+	</window>
+	
+	<window id="multiplePlanWin" width="750px" position="left,top" title="Planning Request" visible="false" closable="true" border="normal"  sizable="true" tooltiptext="Planning Request"
+    	 style="min-height:200px; max-height:500px; overflow:scroll; padding:10px; margin:10px;" apply="main.java.nl.tue.ieis.get.control.MultiplePlanController">
+    	<caption image="/imgs/multiple.png" label="Unplanned Transportation Requests"/>
+    	<listbox multiple="true" checkmark="true" id="requestListbox" emptyMessage="No Unplanned Transportation Request Found" mold="paging" pageSize="4">
+			<listhead>
+				<listheader width="32px" />  
+		    	<listheader label="Origin Place" width="150px"/>
+                <listheader label="Origin Address" width="200px"/>
+                <listheader label="Origin Time" width="110px"/>
+                <listheader label="Dest Place" width="150px"/>
+                <listheader label="Dest Address" width="200px"/>
+                <listheader label="Dest Time" width="110px"/>
+			</listhead>
+			<template name="model">
+				<listitem style="cursor:pointer">
+					<listcell />
+			        <listcell label="${each.source.address.name}"></listcell>
+			        <listcell label="${each.source.address.street}, ${each.source.address.number}, ${each.source.address.city}, ${each.source.address.country}"></listcell>
+			        <listcell label="${each.source.date}"></listcell>
+			        <listcell label="${each.dest.address.name}"></listcell>
+			        <listcell label="${each.dest.address.street}, ${each.dest.address.number}, ${each.dest.address.city}, ${each.dest.address.country}"></listcell>
+			        <listcell label="${each.dest.date}"></listcell>
+			    </listitem>
+			</template>
+		</listbox>
+		<button label="Plan All Selected" id="plannAllBtn" sclass="myButton"/>
+    </window>
+    
+    <window id="releaseWin" width="500px" position="left,top" title="Release Suspended Asset" visible="false" closable="true" border="normal"  sizable="true" tooltiptext="Release Suspended Asset"
+    	style="min-height:200px; max-height:500px; overflow:scroll; padding:10px; margin:10px;" apply="main.java.nl.tue.ieis.get.control.ReleaseAssetController">
+    	<caption image="/imgs/thumb.png" label="Release Suspended Asset"/>
+    	<listbox multiple="true" checkmark="true" id="requestListbox" emptyMessage="No Suspended Asset Found" mold="paging" pageSize="4">
+			<listhead>
+				<listheader width="32px" />  
+		    	<listheader label="ID" width="100px"/>
+                <listheader label="Status" width="150px"/>
+                <listheader label="Longitude" width="80px"/>
+				<listheader label="Latitude" width="80px"/>
+			</listhead>
+			<template name="model">
+				<listitem style="cursor:pointer">
+					<listcell />
+			        <listcell label="${each.mobOpId}"></listcell>
+			        <listcell label="${each.status}"></listcell>
+			        <listcell label="${each.point.latitude}"></listcell>
+			        <listcell label="${each.point.longitude}"></listcell>
+			    </listitem>
+			</template>
+		</listbox>
+		<button label="Release All Selected" id="releaseAllBtn" sclass="myButton"/>
+		<timer id="suspendedAssetTimer" delay="1000" onClientInfo="self.start()" repeats="true"/>
+    </window>
+</div>
+</zk>

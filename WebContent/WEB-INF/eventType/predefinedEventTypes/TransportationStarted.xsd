@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="TransportationStarted.xsd" targetNamespace="TransportationStarted.xsd" elementFormDefault="qualified">
+    <xs:element name="TransportationStarted">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="mobOperID" type="xs:integer"/>
+                <xs:element name="latitude" type="xs:double"/>
+                <xs:element name="longitude" type="xs:double"/>
+                <xs:element name="altitude" type="xs:string"/>
+                <xs:element name="timestamp" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="FlightDiversionDetected.xsd"
+	targetNamespace="FlightDiversionDetected.xsd" elementFormDefault="qualified">
+	<xs:element name="FlightDiversion">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="flightId" type="xs:integer" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="origin" type="xs:string" />
+				<xs:element name="departurelatitude" type="xs:double"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="departurelongitude" type="xs:double"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="destination" type="xs:string" />
+				<xs:element name="arrivallatitude" type="xs:double"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="arrivallongitude" type="xs:double"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="certainty" type="xs:string" />
+				<xs:element name="aircraftId" type="xs:integer" />
+				<xs:element name="flightCode" type="xs:string" />
+				<xs:element name="latitude" type="xs:double" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="longitude" type="xs:double" minOccurs="1"
+					maxOccurs="1" />
+                <xs:element name="timestamp" type="xs:dateTime"
+                    minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

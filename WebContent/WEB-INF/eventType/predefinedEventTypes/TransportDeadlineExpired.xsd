@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="TransportDeadlineExpired.xsd"
+	targetNamespace="TransportDeadlineExpired.xsd" elementFormDefault="qualified">
+
+	<xs:element name="TransportDeadlineExpired">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operatorId" type="xs:integer"
+					minOccurs="1" maxOccurs="1" />
+<!-- 				<xs:element name="location" minOccurs="1" maxOccurs="1"> -->
+<!-- 					<xs:complexType> -->
+<!-- 						<xs:sequence> -->
+<!-- 							<xs:element name="latitude" type="xs:double" -->
+<!-- 								minOccurs="1" maxOccurs="1" /> -->
+<!-- 							<xs:element name="longitude" type="xs:double" -->
+<!-- 								minOccurs="1" maxOccurs="1" /> -->
+<!-- 							Extend with altitude? -->
+<!-- 						</xs:sequence> -->
+<!-- 					</xs:complexType> -->
+<!-- 				</xs:element> -->
+<!-- 			Use flat properties, nested properties can't be filled -->
+				<xs:element name="latitude" type="xs:double" minOccurs="1" maxOccurs="1" />
+				<xs:element name="longitude" type="xs:double" minOccurs="1" maxOccurs="1" />
+				<xs:element name="distanceRemaining" type="xs:long" />
+				<xs:element name="nodeDeadline" type="xs:dateTime" />
+				<xs:element name="timestamp" type="xs:dateTime"
+					minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flightTrace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="Flighttrace.xsd">
+  <flightId>1234</flightId>
+  <departure>
+    <origin>str1234</origin>
+    <departurelatitude>3.1415926535</departurelatitude>
+    <departurelongitude>3.1415926535</departurelongitude>
+  </departure>
+  <arrival>
+    <destination>str1234</destination>
+    <arrivallatitude>3.1415926535</arrivallatitude>
+    <arrivallongitude>3.1415926535</arrivallongitude>
+  </arrival>
+  <timestamp>2012-12-13T12:12:12</timestamp>
+  <bearing>1234</bearing>
+  <speed>1234</speed>
+  <aircraftId>24980875</aircraftId>
+  <altitude>1234</altitude>
+  <flightNumber>str1234</flightNumber>
+  <latitude>50.1415926535</latitude>
+  <longitude>8.1415926535</longitude>
+</flightTrace>

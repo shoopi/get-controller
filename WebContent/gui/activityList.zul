@@ -1,0 +1,74 @@
+<div id="activityDive" apply="main.java.nl.tue.ieis.get.control.TaskController" height="100%">
+	<vbox vflex="9" hflex="1" height="98%">
+	<borderlayout hflex="1" vflex="1" >
+		<center autoscroll="true" >
+			<listbox id="activityListBox" emptyMessage="No Case Selected">
+				<listhead>
+				    <listheader label="Name"/>
+				    <listheader label="Status" width="35%"/>
+				    <!--  <listheader label="Model"/>-->
+				</listhead>
+				<template name="model">
+					<listitem style="cursor:pointer">
+				        <listcell label="${each.taskName}"></listcell>
+				        <listcell label="${each.taskStatus}">
+					        <attribute name="style" if="${each.taskStatus == 'EXECUTING'}">
+								color: blue; font-weight: 900;
+							</attribute>
+							 <attribute name="style" if="${each.taskStatus == 'COMPLETED'}">
+								color: green; font-weight: bold;
+							</attribute>
+							 <attribute name="style" if="${each.taskStatus == 'FUTURE'}">
+								color: red; font-weight: normal;
+							</attribute>
+				        </listcell>
+				        <!--  <listcell label="${each.processDefinitionId}"></listcell>-->
+				    </listitem>
+				</template>
+			</listbox>
+		</center>
+		<south collapsible="true" splittable="true" autoscroll="true" height="34.99%;">
+			<vlayout>
+				<grid id="varGrid" emptyMessage="No Form Variable">
+					<columns>
+						<column width="40%"/>
+						<column/>
+					</columns>
+			        <rows />
+			    </grid>
+		
+				<div style="padding:10px;">
+					<hbox style="float:left;" width="60px">
+						<image id="previewImage" height="50px" visible="false"/>
+					</hbox>
+					<vlayout>
+						<hbox style="float:rigth" id="activityDetails">
+							<vbox>
+								<label id="eventStatus"/>
+								<!--  <label id="activityLabel" />-->
+								<!--  <label id="statusLabel" />-->
+								<label id="drivingStatus" />
+								<button id="execButton" disabled="true" sclass="myButton" label="Execute Task"/>
+							</vbox>
+						</hbox>
+						<label id="descriptionLabel" />
+						<button id="showTerminateWinBtn" sclass="myButton" label="Suspend Transportation" visible="false" image="/imgs/Abort16.png" />
+					</vlayout>
+				</div>
+			</vlayout>
+		</south>
+	</borderlayout>
+	</vbox>
+	<timer id="activityDetailsTimer" delay="2000" onClientInfo="self.start()" repeats="true" />
+	
+	<window id="terminateWin" title="Suspend Transportaiton" width="400px" visible="false" style="padding: 10px; margin: 10px;" 
+		closable="true" border="normal" apply="main.java.nl.tue.ieis.get.control.UpdateCaseController">
+		<caption image="/imgs/Abort16.png"/>
+		
+        <div>
+        	<label>Reason</label>
+        	<textbox id="reasonTextbox" width="370px" height="100px" tabindex="11" multiline="true" constraint="no empty"/>
+        	<button id="terminateBtn" sclass="myButton" label="Suspend Transportation"/>
+        </div>
+    </window>
+</div>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="VehicleSelected.xsd"
+	targetNamespace="VehicleSelected.xsd" elementFormDefault="qualified">
+	<xs:element name="VehicleSelected">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="timestamp" type="xs:date" />
+				<xs:element name="route" type="xs:string" />
+				<xs:element name="operatorId" type="xs:integer" />
+				<xs:element name="caseId" type="xs:integer"/>
+                <xs:element name="vehicleId" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="deadline" type="xs:date"  minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ETA" type="xs:date"  minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

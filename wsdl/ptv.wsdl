@@ -1,0 +1,3387 @@
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://jwsdp.xintermodal.xserver.ptvag.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://exception.core.jabba.ptvag.com" xmlns:ns2="http://common.xserver.ptvag.com" xmlns:ns1="http://xintermodal.xserver.ptvag.com" xmlns:ns0="http://types.xintermodal.xserver.ptvag.com" xmlns="http://schemas.xmlsoap.org/wsdl/" name="XIntermodalWSService" targetNamespace="http://jwsdp.xintermodal.xserver.ptvag.com">
+	<types>
+		<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exception.core.jabba.ptvag.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://exception.core.jabba.ptvag.com" xmlns:ns2="http://common.xserver.ptvag.com" xmlns:ns1="http://xintermodal.xserver.ptvag.com" xmlns:ns0="http://wrappertypes.service.jabba.ptvag.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://exception.core.jabba.ptvag.com">
+			<complexType name="StackElement">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="cause" nillable="true" type="tns:StackElement"/>
+					<element maxOccurs="1" minOccurs="1" name="wrappedContext" nillable="true" type="ns0:ArrayOfString"/>
+				</sequence>
+				<attribute name="className" type="string" use="optional"/>
+				<attribute name="errorKey" type="string" use="optional"/>
+				<attribute name="message" type="string" use="optional"/>
+			</complexType>
+			<complexType name="DatabaseException">
+				<complexContent>
+					<extension base="tns:SystemException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="DatabaseException" type="tns:DatabaseException"/>
+			<complexType name="ParameterNotSetException">
+				<complexContent>
+					<extension base="tns:IllegalParameterException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="ParameterNotSetException" type="tns:ParameterNotSetException"/>
+			<complexType name="IllegalParameterException">
+				<complexContent>
+					<extension base="tns:BusinessException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="IllegalParameterException" type="tns:IllegalParameterException"/>
+			<complexType name="UnexpectedException">
+				<complexContent>
+					<extension base="tns:SystemException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="UnexpectedException" type="tns:UnexpectedException"/>
+			<complexType name="OptimisticRollbackException">
+				<complexContent>
+					<extension base="tns:SystemException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="OptimisticRollbackException" type="tns:OptimisticRollbackException"/>
+			<complexType name="ConstraintViolationException">
+				<complexContent>
+					<extension base="tns:DatabaseException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="ConstraintViolationException" type="tns:ConstraintViolationException"/>
+			<complexType name="TableNotFoundException">
+				<complexContent>
+					<extension base="tns:DatabaseException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="TableNotFoundException" type="tns:TableNotFoundException"/>
+			<complexType name="RemoteAccessException">
+				<complexContent>
+					<extension base="tns:SystemException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="RemoteAccessException" type="tns:RemoteAccessException"/>
+			<complexType name="BaseException">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="stackElement" nillable="true" type="tns:StackElement"/>
+				</sequence>
+				<attribute name="transactionId" type="string" use="optional"/>
+			</complexType>
+			<element name="BaseException" type="tns:BaseException"/>
+			<complexType name="SystemException">
+				<complexContent>
+					<extension base="tns:BaseException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="SystemException" type="tns:SystemException"/>
+			<complexType name="BusinessException">
+				<complexContent>
+					<extension base="tns:BaseException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="BusinessException" type="tns:BusinessException"/>
+			<complexType name="CreateException">
+				<complexContent>
+					<extension base="tns:SystemException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="CreateException" type="tns:CreateException"/>
+			<complexType name="RemoveException">
+				<complexContent>
+					<extension base="tns:SystemException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="RemoveException" type="tns:RemoveException"/>
+			<complexType name="FinderException">
+				<complexContent>
+					<extension base="tns:SystemException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="FinderException" type="tns:FinderException"/>
+			<complexType name="ObjectNotFoundException">
+				<complexContent>
+					<extension base="tns:FinderException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="ObjectNotFoundException" type="tns:ObjectNotFoundException"/>
+			<complexType name="DuplicateKeyException">
+				<complexContent>
+					<extension base="tns:CreateException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="DuplicateKeyException" type="tns:DuplicateKeyException"/>
+		</schema>
+		<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://value.core.jabba.ptvag.com" xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://exception.core.jabba.ptvag.com" xmlns:ns2="http://common.xserver.ptvag.com" xmlns:ns1="http://xintermodal.xserver.ptvag.com" xmlns:ns0="http://types.xintermodal.xserver.ptvag.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://value.core.jabba.ptvag.com">
+			<complexType abstract="true" name="TransientVO">
+				<sequence/>
+			</complexType>
+		</schema>
+		<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://baseservices.service.jabba.ptvag.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://exception.core.jabba.ptvag.com" xmlns:ns2="http://common.xserver.ptvag.com" xmlns:ns1="http://xintermodal.xserver.ptvag.com" xmlns:ns0="http://value.core.jabba.ptvag.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://baseservices.service.jabba.ptvag.com">
+			<import namespace="http://value.core.jabba.ptvag.com"/>
+			<complexType name="CallerContext">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedProperties" nillable="true" type="tns:ArrayOfCallerContextProperty"/>
+						</sequence>
+						<attribute name="log1" type="xsd:string" use="optional"/>
+						<attribute name="log2" type="xsd:string" use="optional"/>
+						<attribute name="log3" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="CallerContextProperty">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence/>
+						<attribute name="key" type="xsd:string" use="optional"/>
+						<attribute name="value" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfCallerContextProperty">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="CallerContextProperty" nillable="true" type="tns:CallerContextProperty"/>
+				</sequence>
+			</complexType>
+		</schema>
+		<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://wrappertypes.service.jabba.ptvag.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://exception.core.jabba.ptvag.com" xmlns:ns2="http://common.xserver.ptvag.com" xmlns:ns1="http://xintermodal.xserver.ptvag.com" xmlns:ns0="http://types.xintermodal.xserver.ptvag.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://wrappertypes.service.jabba.ptvag.com">
+			<!--  Calendar  -->
+			<complexType name="ArrayOfCalendar">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Calendar" nillable="true" type="xsd:dateTime"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfCalendar">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfCalendar" nillable="true" type="tns:ArrayOfCalendar"/>
+				</sequence>
+			</complexType>
+			<!--  String  -->
+			<complexType name="ArrayOfString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="String" nillable="true" type="xsd:string"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfString" nillable="true" type="tns:ArrayOfString"/>
+				</sequence>
+			</complexType>
+			<!--  byte  -->
+			<complexType name="ArrayOfArrayOfByte">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfByte" nillable="true" type="xsd:base64Binary"/>
+				</sequence>
+			</complexType>
+			<!--  short  -->
+			<complexType name="ArrayOfShort">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Short" type="xsd:short"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfShort">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfShort" nillable="true" type="tns:ArrayOfShort"/>
+				</sequence>
+			</complexType>
+			<!--  int  -->
+			<complexType name="ArrayOfInt">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Int" type="xsd:int"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfInt">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfInt" nillable="true" type="tns:ArrayOfInt"/>
+				</sequence>
+			</complexType>
+			<!--  long  -->
+			<complexType name="ArrayOfLong">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Long" type="xsd:long"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfLong">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfLong" nillable="true" type="tns:ArrayOfLong"/>
+				</sequence>
+			</complexType>
+			<!--  float  -->
+			<complexType name="ArrayOfFloat">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Float" type="xsd:float"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfFloat">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfFloat" nillable="true" type="tns:ArrayOfFloat"/>
+				</sequence>
+			</complexType>
+			<!--  double  -->
+			<complexType name="ArrayOfDouble">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Double" type="xsd:double"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfDouble">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfDouble" nillable="true" type="tns:ArrayOfDouble"/>
+				</sequence>
+			</complexType>
+			<!--  boolean  -->
+			<complexType name="ArrayOfBoolean">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Boolean" type="xsd:boolean"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfBoolean">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfBoolean" nillable="true" type="tns:ArrayOfBoolean"/>
+				</sequence>
+			</complexType>
+		</schema>
+		<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://common.xserver.ptvag.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://exception.core.jabba.ptvag.com" xmlns:ns2="http://exception.core.jabba.ptvag.com" xmlns:ns1="http://wrappertypes.service.jabba.ptvag.com" xmlns:ns0="http://value.core.jabba.ptvag.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://common.xserver.ptvag.com">
+			<import namespace="http://wrappertypes.service.jabba.ptvag.com"/>
+			<import namespace="http://exception.core.jabba.ptvag.com"/>
+			<import namespace="http://value.core.jabba.ptvag.com"/>
+			<complexType name="RequestOptions">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedResponseGeometry" nillable="true" type="tns:ArrayOfGeometryEncoding"/>
+						</sequence>
+						<attribute name="coordFormat" type="tns:CoordFormat" use="required"/>
+						<attribute name="profile" type="xsd:string" use="optional"/>
+						<attribute name="profileXMLSnippet" type="xsd:string" use="optional"/>
+						<attribute name="srId" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfRequestOptions">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="RequestOptions" nillable="true" type="tns:RequestOptions"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfRequestOptions">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfRequestOptions" nillable="true" type="tns:ArrayOfRequestOptions"/>
+				</sequence>
+			</complexType>
+			<simpleType name="GeometryEncoding">
+				<restriction base="xsd:string">
+					<enumeration value="PLAIN"/>
+					<enumeration value="WKB"/>
+					<enumeration value="WKT"/>
+					<enumeration value="KML"/>
+				</restriction>
+			</simpleType>
+			<complexType name="ArrayOfGeometryEncoding">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GeometryEncoding" nillable="false" type="tns:GeometryEncoding"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGeometryEncoding">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGeometryEncoding" nillable="true" type="tns:ArrayOfGeometryEncoding"/>
+				</sequence>
+			</complexType>
+			<simpleType name="CoordFormat">
+				<restriction base="xsd:string">
+					<enumeration value="OG_GEODECIMAL"/>
+					<enumeration value="PTV_MERCATOR"/>
+					<enumeration value="PTV_GEOMINSEC"/>
+					<enumeration value="PTV_GEODECIMAL"/>
+					<enumeration value="PTV_CONFORM"/>
+					<enumeration value="PTV_SUPERCONFORM"/>
+					<enumeration value="PTV_SMARTUNITS"/>
+					<enumeration value="OG_SRID"/>
+				</restriction>
+			</simpleType>
+			<complexType name="ArrayOfCoordFormat">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="CoordFormat" nillable="false" type="tns:CoordFormat"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfCoordFormat">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfCoordFormat" nillable="true" type="tns:ArrayOfCoordFormat"/>
+				</sequence>
+			</complexType>
+			<complexType name="BoundingBox">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="leftTop" nillable="true" type="tns:Point"/>
+							<element maxOccurs="1" minOccurs="0" name="rightBottom" nillable="true" type="tns:Point"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfBoundingBox">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="BoundingBox" nillable="true" type="tns:BoundingBox"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfBoundingBox">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfBoundingBox" nillable="true" type="tns:ArrayOfBoundingBox"/>
+				</sequence>
+			</complexType>
+			<complexType abstract="true" name="EncodedGeometry">
+				<complexContent>
+					<extension base="tns:EncodedGeometryBase">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="kml" nillable="true" type="tns:KML"/>
+						</sequence>
+						<attribute name="wkb" type="xsd:base64Binary" use="optional"/>
+						<attribute name="wkt" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfEncodedGeometry">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="EncodedGeometry" nillable="true" type="tns:EncodedGeometry"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfEncodedGeometry">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfEncodedGeometry" nillable="true" type="tns:ArrayOfEncodedGeometry"/>
+				</sequence>
+			</complexType>
+			<complexType name="LinearRing">
+				<complexContent>
+					<extension base="tns:EncodedGeometry">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="linearRing" nillable="true" type="tns:PlainLinearRing"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfLinearRing">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="LinearRing" nillable="true" type="tns:LinearRing"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfLinearRing">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfLinearRing" nillable="true" type="tns:ArrayOfLinearRing"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlainLinearRing">
+				<complexContent>
+					<extension base="tns:PlainGeometryBase">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedPoints" nillable="true" type="tns:ArrayOfPlainPoint"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainLinearRing">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainLinearRing" nillable="true" type="tns:PlainLinearRing"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainLinearRing">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainLinearRing" nillable="true" type="tns:ArrayOfPlainLinearRing"/>
+				</sequence>
+			</complexType>
+			<complexType name="Polygon">
+				<complexContent>
+					<extension base="tns:EncodedGeometry">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="polygon" nillable="true" type="tns:PlainPolygon"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPolygon">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Polygon" nillable="true" type="tns:Polygon"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPolygon">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPolygon" nillable="true" type="tns:ArrayOfPolygon"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlainPolygon">
+				<complexContent>
+					<extension base="tns:PlainGeometryBase">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedLinearRings" nillable="true" type="tns:ArrayOfPlainLinearRing"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainPolygon">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainPolygon" nillable="true" type="tns:PlainPolygon"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainPolygon">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainPolygon" nillable="true" type="tns:ArrayOfPlainPolygon"/>
+				</sequence>
+			</complexType>
+			<complexType name="LineString">
+				<complexContent>
+					<extension base="tns:EncodedGeometry">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="lineString" nillable="true" type="tns:PlainLineString"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfLineString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="LineString" nillable="true" type="tns:LineString"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfLineString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfLineString" nillable="true" type="tns:ArrayOfLineString"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlainLineString">
+				<complexContent>
+					<extension base="tns:PlainGeometryBase">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedPoints" nillable="true" type="tns:ArrayOfPlainPoint"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainLineString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainLineString" nillable="true" type="tns:PlainLineString"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainLineString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainLineString" nillable="true" type="tns:ArrayOfPlainLineString"/>
+				</sequence>
+			</complexType>
+			<complexType name="Point">
+				<complexContent>
+					<extension base="tns:EncodedGeometry">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="point" nillable="true" type="tns:PlainPoint"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPoint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Point" nillable="true" type="tns:Point"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPoint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPoint" nillable="true" type="tns:ArrayOfPoint"/>
+				</sequence>
+			</complexType>
+			<complexType name="XServiceException">
+				<complexContent>
+					<extension base="ns2:BusinessException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="XServiceException" type="tns:XServiceException"/>
+			<complexType name="PlainMultiPoint">
+				<complexContent>
+					<extension base="tns:PlainGeometryBase">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedPoints" nillable="true" type="tns:ArrayOfPlainPoint"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainMultiPoint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainMultiPoint" nillable="true" type="tns:PlainMultiPoint"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainMultiPoint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainMultiPoint" nillable="true" type="tns:ArrayOfPlainMultiPoint"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlainMultiLineString">
+				<complexContent>
+					<extension base="tns:PlainGeometryBase">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedLineStrings" nillable="true" type="tns:ArrayOfPlainLineString"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainMultiLineString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainMultiLineString" nillable="true" type="tns:PlainMultiLineString"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainMultiLineString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainMultiLineString" nillable="true" type="tns:ArrayOfPlainMultiLineString"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlainMultiPolygon">
+				<complexContent>
+					<extension base="tns:PlainGeometryBase">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedPolygons" nillable="true" type="tns:ArrayOfPlainPolygon"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainMultiPolygon">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainMultiPolygon" nillable="true" type="tns:PlainMultiPolygon"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainMultiPolygon">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainMultiPolygon" nillable="true" type="tns:ArrayOfPlainMultiPolygon"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlainGeometryCollection">
+				<complexContent>
+					<extension base="tns:PlainGeometryBase">
+						<sequence>
+							<element maxOccurs="1" minOccurs="1" name="wrappedGeometries" nillable="true" type="tns:ArrayOfPlainGeometryBase"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainGeometryCollection">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainGeometryCollection" nillable="true" type="tns:PlainGeometryCollection"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainGeometryCollection">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainGeometryCollection" nillable="true" type="tns:ArrayOfPlainGeometryCollection"/>
+				</sequence>
+			</complexType>
+			<complexType name="MultiPoint">
+				<complexContent>
+					<extension base="tns:EncodedGeometry">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="multiPoint" nillable="true" type="tns:PlainMultiPoint"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfMultiPoint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="MultiPoint" nillable="true" type="tns:MultiPoint"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfMultiPoint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfMultiPoint" nillable="true" type="tns:ArrayOfMultiPoint"/>
+				</sequence>
+			</complexType>
+			<complexType name="MultiLineString">
+				<complexContent>
+					<extension base="tns:EncodedGeometry">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="multiLineString" nillable="true" type="tns:PlainMultiLineString"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfMultiLineString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="MultiLineString" nillable="true" type="tns:MultiLineString"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfMultiLineString">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfMultiLineString" nillable="true" type="tns:ArrayOfMultiLineString"/>
+				</sequence>
+			</complexType>
+			<complexType name="MultiPolygon">
+				<complexContent>
+					<extension base="tns:EncodedGeometry">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="multiPolygon" nillable="true" type="tns:PlainMultiPolygon"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfMultiPolygon">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="MultiPolygon" nillable="true" type="tns:MultiPolygon"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfMultiPolygon">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfMultiPolygon" nillable="true" type="tns:ArrayOfMultiPolygon"/>
+				</sequence>
+			</complexType>
+			<complexType name="GeometryCollection">
+				<complexContent>
+					<extension base="tns:EncodedGeometry">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="geometryCollection" nillable="true" type="tns:PlainGeometryCollection"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGeometryCollection">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GeometryCollection" nillable="true" type="tns:GeometryCollection"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGeometryCollection">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGeometryCollection" nillable="true" type="tns:ArrayOfGeometryCollection"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlainGeometryBase">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainGeometryBase">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainGeometryBase" nillable="true" type="tns:PlainGeometryBase"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainGeometryBase">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainGeometryBase" nillable="true" type="tns:ArrayOfPlainGeometryBase"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlainPoint">
+				<complexContent>
+					<extension base="tns:PlainGeometryBase">
+						<sequence/>
+						<attribute name="x" type="xsd:double" use="required"/>
+						<attribute name="y" type="xsd:double" use="required"/>
+						<attribute name="z" type="xsd:double" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlainPoint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlainPoint" nillable="true" type="tns:PlainPoint"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlainPoint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlainPoint" nillable="true" type="tns:ArrayOfPlainPoint"/>
+				</sequence>
+			</complexType>
+			<complexType abstract="true" name="EncodedGeometryBase">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfEncodedGeometryBase">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="EncodedGeometryBase" nillable="true" type="tns:EncodedGeometryBase"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfEncodedGeometryBase">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfEncodedGeometryBase" nillable="true" type="tns:ArrayOfEncodedGeometryBase"/>
+				</sequence>
+			</complexType>
+			<simpleType name="ErrorCode">
+				<restriction base="xsd:string">
+					<enumeration value="REQUEST_INVALID_WKT"/>
+					<enumeration value="REQUEST_INVALID_WKB"/>
+					<enumeration value="REQUEST_INVALID_KML"/>
+					<enumeration value="KML_PLACEMARK_NOT_FOUND"/>
+					<enumeration value="CONVERT_GEOMETRY_OBJECT"/>
+					<enumeration value="CONVERT_COORDINATE_FORMAT"/>
+					<enumeration value="GEOMETRY_ENCODING"/>
+				</restriction>
+			</simpleType>
+			<complexType name="ArrayOfErrorCode">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ErrorCode" nillable="false" type="tns:ErrorCode"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfErrorCode">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfErrorCode" nillable="true" type="tns:ArrayOfErrorCode"/>
+				</sequence>
+			</complexType>
+			<complexType name="KML">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedPlacemarks" nillable="true" type="ns1:ArrayOfString"/>
+						</sequence>
+						<attribute name="kml" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfKML">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="KML" nillable="true" type="tns:KML"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfKML">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfKML" nillable="true" type="tns:ArrayOfKML"/>
+				</sequence>
+			</complexType>
+			<simpleType name="JobStatus">
+				<restriction base="xsd:string">
+					<enumeration value="QUEUING"/>
+					<enumeration value="RUNNING"/>
+					<enumeration value="STOPPING"/>
+					<enumeration value="SUCCEEDED"/>
+					<enumeration value="FAILED"/>
+					<enumeration value="DELETED"/>
+					<enumeration value="UNKNOWN"/>
+				</restriction>
+			</simpleType>
+			<complexType name="ArrayOfJobStatus">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="JobStatus" nillable="false" type="tns:JobStatus"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfJobStatus">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfJobStatus" nillable="true" type="tns:ArrayOfJobStatus"/>
+				</sequence>
+			</complexType>
+			<complexType name="Job">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="progress" nillable="true" type="tns:JobProgress"/>
+						</sequence>
+						<attribute name="elapsedTime" type="xsd:int" use="required"/>
+						<attribute name="id" type="xsd:string" use="optional"/>
+						<attribute name="status" type="tns:JobStatus" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfJob">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Job" nillable="true" type="tns:Job"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfJob">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfJob" nillable="true" type="tns:ArrayOfJob"/>
+				</sequence>
+			</complexType>
+			<complexType abstract="true" name="JobProgress">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfJobProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="JobProgress" nillable="true" type="tns:JobProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfJobProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfJobProgress" nillable="true" type="tns:ArrayOfJobProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkProgress">
+				<complexContent>
+					<extension base="tns:JobProgress">
+						<sequence/>
+						<attribute name="failed" type="xsd:int" use="required"/>
+						<attribute name="remaining" type="xsd:int" use="required"/>
+						<attribute name="successful" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfBulkProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="BulkProgress" nillable="true" type="tns:BulkProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfBulkProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfBulkProgress" nillable="true" type="tns:ArrayOfBulkProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="DistanceMatrixProgress">
+				<complexContent>
+					<extension base="tns:JobProgress">
+						<sequence/>
+						<attribute name="currentRowIndex" type="xsd:int" use="required"/>
+						<attribute name="lastRowIndex" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfDistanceMatrixProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="DistanceMatrixProgress" nillable="true" type="tns:DistanceMatrixProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfDistanceMatrixProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfDistanceMatrixProgress" nillable="true" type="tns:ArrayOfDistanceMatrixProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="WatchOptions">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence/>
+						<attribute name="maximumPollingPeriod" type="xsd:int" use="optional"/>
+						<attribute name="progressUpdatePeriod" type="xsd:int" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfWatchOptions">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="WatchOptions" nillable="true" type="tns:WatchOptions"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfWatchOptions">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfWatchOptions" nillable="true" type="tns:ArrayOfWatchOptions"/>
+				</sequence>
+			</complexType>
+			<complexType name="PlanProgress">
+				<complexContent>
+					<extension base="tns:JobProgress">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="distanceMatrixCalculationProgress" nillable="true" type="tns:DistanceMatrixCalculationProgress"/>
+							<element maxOccurs="1" minOccurs="0" name="improvementProgress" nillable="true" type="tns:ImprovementProgress"/>
+						</sequence>
+						<attribute name="action" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfPlanProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PlanProgress" nillable="true" type="tns:PlanProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfPlanProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfPlanProgress" nillable="true" type="tns:ArrayOfPlanProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="DistanceMatrixCalculationProgress">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="currentDistanceMatrixProgress" nillable="true" type="tns:DistanceMatrixProgress"/>
+						</sequence>
+						<attribute name="currentDimaIndex" type="xsd:int" use="required"/>
+						<attribute name="dimaId" type="xsd:int" use="required"/>
+						<attribute name="lastDimaIndex" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfDistanceMatrixCalculationProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="DistanceMatrixCalculationProgress" nillable="true" type="tns:DistanceMatrixCalculationProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfDistanceMatrixCalculationProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfDistanceMatrixCalculationProgress" nillable="true" type="tns:ArrayOfDistanceMatrixCalculationProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ImprovementProgress">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="bestPlan" nillable="true" type="tns:KeyFigures"/>
+							<element maxOccurs="1" minOccurs="0" name="currentPlan" nillable="true" type="tns:KeyFigures"/>
+							<element maxOccurs="1" minOccurs="0" name="initialPlan" nillable="true" type="tns:KeyFigures"/>
+						</sequence>
+						<attribute name="availableMachineTime" type="xsd:int" use="required"/>
+						<attribute name="iterationIndex" type="xsd:int" use="required"/>
+						<attribute name="numberOfImprovements" type="xsd:int" use="required"/>
+						<attribute name="usedMachineTime" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfImprovementProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ImprovementProgress" nillable="true" type="tns:ImprovementProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfImprovementProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfImprovementProgress" nillable="true" type="tns:ArrayOfImprovementProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="KeyFigures">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence/>
+						<attribute name="costOfObjectiveFunction" type="xsd:int" use="required"/>
+						<attribute name="numberOfInfeasibleOrders" type="xsd:int" use="required"/>
+						<attribute name="numberOfScheduledOrders" type="xsd:int" use="required"/>
+						<attribute name="numberOfScheduledVehicles" type="xsd:int" use="required"/>
+						<attribute name="numberOfUnscheduledOrders" type="xsd:int" use="required"/>
+						<attribute name="totalChainCost" type="xsd:int" use="required"/>
+						<attribute name="totalChainPeriod" type="xsd:int" use="required"/>
+						<attribute name="totalTourCost" type="xsd:int" use="required"/>
+						<attribute name="totalTourCount" type="xsd:int" use="required"/>
+						<attribute name="totalTourDistance" type="xsd:int" use="required"/>
+						<attribute name="totalTourDrivingPeriod" type="xsd:int" use="required"/>
+						<attribute name="totalTourPeriod" type="xsd:int" use="required"/>
+						<attribute name="totalTourWaitingPeriod" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfKeyFigures">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="KeyFigures" nillable="true" type="tns:KeyFigures"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfKeyFigures">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfKeyFigures" nillable="true" type="tns:ArrayOfKeyFigures"/>
+				</sequence>
+			</complexType>
+			<complexType name="OptimizationProgress">
+				<complexContent>
+					<extension base="ns0:TransientVO">
+						<sequence/>
+						<attribute name="currentLoopIndex" type="xsd:int" use="required"/>
+						<attribute name="lastLoopIndex" type="xsd:int" use="required"/>
+						<attribute name="progress" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfOptimizationProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="OptimizationProgress" nillable="true" type="tns:OptimizationProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfOptimizationProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfOptimizationProgress" nillable="true" type="tns:ArrayOfOptimizationProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ClusterProgress">
+				<complexContent>
+					<extension base="tns:JobProgress">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="distanceMatrixProgress" nillable="true" type="tns:DistanceMatrixProgress"/>
+							<element maxOccurs="1" minOccurs="0" name="optimizationProgress" nillable="true" type="tns:OptimizationProgress"/>
+						</sequence>
+						<attribute name="action" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfClusterProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ClusterProgress" nillable="true" type="tns:ClusterProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfClusterProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfClusterProgress" nillable="true" type="tns:ArrayOfClusterProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="TerritoryProgress">
+				<complexContent>
+					<extension base="tns:JobProgress">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="distanceMatrixProgress" nillable="true" type="tns:DistanceMatrixProgress"/>
+						</sequence>
+						<attribute name="action" type="xsd:string" use="optional"/>
+						<attribute name="optimizationProgress" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfTerritoryProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="TerritoryProgress" nillable="true" type="tns:TerritoryProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfTerritoryProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfTerritoryProgress" nillable="true" type="tns:ArrayOfTerritoryProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ZoneLoadingProgress">
+				<complexContent>
+					<extension base="tns:JobProgress">
+						<sequence/>
+						<attribute name="action" type="xsd:string" use="optional"/>
+						<attribute name="optimizationProgress" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfZoneLoadingProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ZoneLoadingProgress" nillable="true" type="tns:ZoneLoadingProgress"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfZoneLoadingProgress">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfZoneLoadingProgress" nillable="true" type="tns:ArrayOfZoneLoadingProgress"/>
+				</sequence>
+			</complexType>
+		</schema>
+		<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xintermodal.xserver.ptvag.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://wrappertypes.service.jabba.ptvag.com" xmlns:ns2="http://value.core.jabba.ptvag.com" xmlns:ns1="http://exception.core.jabba.ptvag.com" xmlns:ns0="http://common.xserver.ptvag.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://xintermodal.xserver.ptvag.com">
+			<import namespace="http://wrappertypes.service.jabba.ptvag.com"/>
+			<import namespace="http://common.xserver.ptvag.com"/>
+			<import namespace="http://value.core.jabba.ptvag.com"/>
+			<import namespace="http://exception.core.jabba.ptvag.com"/>
+			<complexType name="TransportAlternative">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedLegs" nillable="true" type="tns:ArrayOfVoyage"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfTransportAlternative">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="TransportAlternative" nillable="true" type="tns:TransportAlternative"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfTransportAlternative">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfTransportAlternative" nillable="true" type="tns:ArrayOfTransportAlternative"/>
+				</sequence>
+			</complexType>
+			<complexType name="Voyage">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedRoadLegCostsPerCargoType" nillable="true" type="ns3:ArrayOfInt"/>
+						</sequence>
+						<attribute name="fromTerminalCode" type="xsd:string" use="optional"/>
+						<attribute name="lineCode" type="xsd:string" use="optional"/>
+						<attribute name="startTime" type="xsd:dateTime" use="optional"/>
+						<attribute name="toTerminalCode" type="xsd:string" use="optional"/>
+						<attribute name="transportModeCode" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfVoyage">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Voyage" nillable="true" type="tns:Voyage"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfVoyage">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfVoyage" nillable="true" type="tns:ArrayOfVoyage"/>
+				</sequence>
+			</complexType>
+			<complexType name="SchedulingOption">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedConversionFactor2Equivalent" nillable="true" type="ns3:ArrayOfDouble"/>
+						</sequence>
+						<attribute name="enableLogging" type="xsd:boolean" use="required"/>
+						<attribute name="numberOfCargoTypes" type="xsd:int" use="required"/>
+						<attribute name="useLazyRestrictions" type="xsd:boolean" use="required"/>
+						<attribute name="usePresolve" type="xsd:boolean" use="required"/>
+						<attribute name="useStartTimePriority" type="xsd:boolean" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfSchedulingOption">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="SchedulingOption" nillable="true" type="tns:SchedulingOption"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfSchedulingOption">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfSchedulingOption" nillable="true" type="tns:ArrayOfSchedulingOption"/>
+				</sequence>
+			</complexType>
+			<complexType name="SchedulingRequest">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="schedulingOption" nillable="true" type="tns:SchedulingOption"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedSchedulingOrders" nillable="true" type="tns:ArrayOfSchedulingOrder"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedVoyageConstraints" nillable="true" type="tns:ArrayOfVoyageConstraint"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfSchedulingRequest">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="SchedulingRequest" nillable="true" type="tns:SchedulingRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfSchedulingRequest">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfSchedulingRequest" nillable="true" type="tns:ArrayOfSchedulingRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="SchedulingOrder">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedNumberOfCargoTypes" nillable="true" type="ns3:ArrayOfInt"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedTransportAlternatives" nillable="true" type="tns:ArrayOfTransportAlternative"/>
+						</sequence>
+						<attribute name="deliveryLocationCode" type="xsd:string" use="optional"/>
+						<attribute name="id" type="xsd:string" use="optional"/>
+						<attribute name="pickupLocationCode" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfSchedulingOrder">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="SchedulingOrder" nillable="true" type="tns:SchedulingOrder"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfSchedulingOrder">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfSchedulingOrder" nillable="true" type="tns:ArrayOfSchedulingOrder"/>
+				</sequence>
+			</complexType>
+			<complexType name="SchedulingResponse">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedScheduledOrders" nillable="true" type="tns:ArrayOfScheduledOrder"/>
+						</sequence>
+						<attribute name="planningMessage" type="xsd:string" use="optional"/>
+						<attribute name="planningStatus" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfSchedulingResponse">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="SchedulingResponse" nillable="true" type="tns:SchedulingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfSchedulingResponse">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfSchedulingResponse" nillable="true" type="tns:ArrayOfSchedulingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="TransportOrder">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="deliveryLocation" nillable="true" type="tns:Location"/>
+							<element maxOccurs="1" minOccurs="0" name="pickupLocation" nillable="true" type="tns:Location"/>
+							<element maxOccurs="1" minOccurs="0" name="specialRoutingOptions" nillable="true" type="tns:RoutingOption"/>
+						</sequence>
+						<attribute name="earliestDeliveryTime" type="xsd:dateTime" use="optional"/>
+						<attribute name="earliestPickupTime" type="xsd:dateTime" use="optional"/>
+						<attribute name="id" type="xsd:string" use="optional"/>
+						<attribute name="latestDeliveryTime" type="xsd:dateTime" use="optional"/>
+						<attribute name="latestPickupTime" type="xsd:dateTime" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfTransportOrder">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="TransportOrder" nillable="true" type="tns:TransportOrder"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfTransportOrder">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfTransportOrder" nillable="true" type="tns:ArrayOfTransportOrder"/>
+				</sequence>
+			</complexType>
+			<complexType name="TransportAlternativesRequest">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="generalRoutingOptions" nillable="true" type="tns:RoutingOption"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedTransportOrders" nillable="true" type="tns:ArrayOfTransportOrder"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfTransportAlternativesRequest">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="TransportAlternativesRequest" nillable="true" type="tns:TransportAlternativesRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfTransportAlternativesRequest">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfTransportAlternativesRequest" nillable="true" type="tns:ArrayOfTransportAlternativesRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="Emission">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="carbonDioxide" type="xsd:double" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfEmission">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Emission" nillable="true" type="tns:Emission"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfEmission">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfEmission" nillable="true" type="tns:ArrayOfEmission"/>
+				</sequence>
+			</complexType>
+			<complexType name="Line">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="operator" nillable="true" type="tns:Operator"/>
+							<element maxOccurs="1" minOccurs="0" name="transportMode" nillable="true" type="tns:TransportMode"/>
+						</sequence>
+						<attribute name="code" type="xsd:string" use="optional"/>
+						<attribute name="name" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfLine">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Line" nillable="true" type="tns:Line"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfLine">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfLine" nillable="true" type="tns:ArrayOfLine"/>
+				</sequence>
+			</complexType>
+			<complexType name="RoutingSegment">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="emission" nillable="true" type="tns:Emission"/>
+							<element maxOccurs="1" minOccurs="0" name="fromStation" nillable="true" type="tns:Station"/>
+							<element maxOccurs="1" minOccurs="0" name="line" nillable="true" type="tns:Line"/>
+							<element maxOccurs="1" minOccurs="0" name="toStation" nillable="true" type="tns:Station"/>
+							<element maxOccurs="1" minOccurs="0" name="transportMode" nillable="true" type="tns:TransportMode"/>
+						</sequence>
+						<attribute name="accompanied" type="xsd:boolean" use="required"/>
+						<attribute name="closingTime" type="xsd:dateTime" use="optional"/>
+						<attribute name="costs" type="xsd:int" use="required"/>
+						<attribute name="distance" type="xsd:int" use="required"/>
+						<attribute name="duration" type="xsd:int" use="required"/>
+						<attribute name="handlingTime" type="xsd:int" use="required"/>
+						<attribute name="readyForPickup" type="xsd:dateTime" use="optional"/>
+						<attribute name="travelTime" type="xsd:int" use="required"/>
+						<attribute name="waitingTime" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfRoutingSegment">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="RoutingSegment" nillable="true" type="tns:RoutingSegment"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfRoutingSegment">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfRoutingSegment" nillable="true" type="tns:ArrayOfRoutingSegment"/>
+				</sequence>
+			</complexType>
+			<complexType name="RoutingAlternative">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedItinerary" nillable="true" type="tns:ArrayOfRoutingSegment"/>
+							<element maxOccurs="1" minOccurs="0" name="polygon" nillable="true" type="ns0:PlainLineString"/>
+							<element maxOccurs="1" minOccurs="0" name="totalEmission" nillable="true" type="tns:Emission"/>
+						</sequence>
+						<attribute name="name" type="xsd:string" use="optional"/>
+						<attribute name="numberOfTransfers" type="xsd:int" use="required"/>
+						<attribute name="startTime" type="xsd:dateTime" use="optional"/>
+						<attribute name="totalCosts" type="xsd:int" use="required"/>
+						<attribute name="totalDistance" type="xsd:int" use="required"/>
+						<attribute name="totalDuration" type="xsd:int" use="required"/>
+						<attribute name="totalHandlingTime" type="xsd:int" use="required"/>
+						<attribute name="totalTravelTimeIM" type="xsd:int" use="required"/>
+						<attribute name="totalTravelTimeRoad" type="xsd:int" use="required"/>
+						<attribute name="totalWaitingTime" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfRoutingAlternative">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="RoutingAlternative" nillable="true" type="tns:RoutingAlternative"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfRoutingAlternative">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfRoutingAlternative" nillable="true" type="tns:ArrayOfRoutingAlternative"/>
+				</sequence>
+			</complexType>
+			<complexType name="RoutingResponse">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedRoutes" nillable="true" type="tns:ArrayOfRoutingAlternative"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfRoutingResponse">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="RoutingResponse" nillable="true" type="tns:RoutingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfRoutingResponse">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfRoutingResponse" nillable="true" type="tns:ArrayOfRoutingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="TransportMode">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="code" type="xsd:string" use="optional"/>
+						<attribute name="name" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfTransportMode">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="TransportMode" nillable="true" type="tns:TransportMode"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfTransportMode">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfTransportMode" nillable="true" type="tns:ArrayOfTransportMode"/>
+				</sequence>
+			</complexType>
+			<complexType name="Operator">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="code" type="xsd:string" use="optional"/>
+						<attribute name="name" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfOperator">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Operator" nillable="true" type="tns:Operator"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfOperator">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfOperator" nillable="true" type="tns:ArrayOfOperator"/>
+				</sequence>
+			</complexType>
+			<complexType name="Location">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="point" nillable="true" type="ns0:PlainPoint"/>
+						</sequence>
+						<attribute name="city" type="xsd:string" use="optional"/>
+						<attribute name="code" type="xsd:string" use="optional"/>
+						<attribute name="country" type="xsd:string" use="optional"/>
+						<attribute name="houseNumber" type="xsd:string" use="optional"/>
+						<attribute name="name" type="xsd:string" use="optional"/>
+						<attribute name="postalCode" type="xsd:string" use="optional"/>
+						<attribute name="street" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfLocation">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Location" nillable="true" type="tns:Location"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfLocation">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfLocation" nillable="true" type="tns:ArrayOfLocation"/>
+				</sequence>
+			</complexType>
+			<complexType name="RoutingOption">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedExcludedOperatorCodes" nillable="true" type="ns3:ArrayOfString"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedExcludedTerminalCodes" nillable="true" type="ns3:ArrayOfString"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedExcludedTransportModeCodes" nillable="true" type="ns3:ArrayOfString"/>
+						</sequence>
+						<attribute name="accompanied" type="xsd:boolean" use="required"/>
+						<attribute name="maxCosts" type="xsd:int" use="required"/>
+						<attribute name="maxDuration" type="xsd:int" use="required"/>
+						<attribute name="maxTerminalDistance" type="xsd:int" use="required"/>
+						<attribute name="maxTransfers" type="xsd:int" use="required"/>
+						<attribute name="numberOfAlternatives" type="xsd:int" use="required"/>
+						<attribute name="planningHorizon" type="xsd:int" use="required"/>
+						<attribute name="startTime" type="xsd:dateTime" use="optional"/>
+						<attribute name="timeCostWeight" type="xsd:int" use="required"/>
+						<attribute name="withWayList" type="xsd:boolean" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfRoutingOption">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="RoutingOption" nillable="true" type="tns:RoutingOption"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfRoutingOption">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfRoutingOption" nillable="true" type="tns:ArrayOfRoutingOption"/>
+				</sequence>
+			</complexType>
+			<complexType name="RoutingRequest">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="routingOptions" nillable="true" type="tns:RoutingOption"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedStopOffs" nillable="true" type="tns:ArrayOfLocation"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfRoutingRequest">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="RoutingRequest" nillable="true" type="tns:RoutingRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfRoutingRequest">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfRoutingRequest" nillable="true" type="tns:ArrayOfRoutingRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="XIntermodalException">
+				<complexContent>
+					<extension base="ns1:BusinessException">
+						<sequence/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<element name="XIntermodalException" type="tns:XIntermodalException"/>
+			<complexType name="StationTimeEvent">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="emission" nillable="true" type="tns:Emission"/>
+						</sequence>
+						<attribute name="accTime" type="xsd:int" use="required"/>
+						<attribute name="costs" type="xsd:int" use="required"/>
+						<attribute name="distance" type="xsd:int" use="required"/>
+						<attribute name="duration" type="xsd:int" use="required"/>
+						<attribute name="type" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfStationTimeEvent">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="StationTimeEvent" nillable="true" type="tns:StationTimeEvent"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfStationTimeEvent">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfStationTimeEvent" nillable="true" type="tns:ArrayOfStationTimeEvent"/>
+				</sequence>
+			</complexType>
+			<complexType name="ScheduledOrder">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="transportAlternative" nillable="true" type="tns:TransportAlternative"/>
+						</sequence>
+						<attribute name="id" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfScheduledOrder">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ScheduledOrder" nillable="true" type="tns:ScheduledOrder"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfScheduledOrder">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfScheduledOrder" nillable="true" type="tns:ArrayOfScheduledOrder"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSRoute">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="agencyId" type="xsd:string" use="optional"/>
+						<attribute name="combinedTransport" type="xsd:boolean" use="required"/>
+						<attribute name="routeDesc" type="xsd:string" use="optional"/>
+						<attribute name="routeId" type="xsd:string" use="optional"/>
+						<attribute name="routeLongName" type="xsd:string" use="optional"/>
+						<attribute name="routeShortName" type="xsd:string" use="optional"/>
+						<attribute name="routeType" type="tns:GTFSRouteType" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSRoute">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSRoute" nillable="true" type="tns:GTFSRoute"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSRoute">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSRoute" nillable="true" type="tns:ArrayOfGTFSRoute"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSStop">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="city" type="xsd:string" use="optional"/>
+						<attribute name="country" type="xsd:string" use="optional"/>
+						<attribute name="housenr" type="xsd:string" use="optional"/>
+						<attribute name="postcode" type="xsd:string" use="optional"/>
+						<attribute name="stopId" type="xsd:string" use="optional"/>
+						<attribute name="stopLat" type="xsd:double" use="required"/>
+						<attribute name="stopLon" type="xsd:double" use="required"/>
+						<attribute name="stopName" type="xsd:string" use="optional"/>
+						<attribute name="street" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSStop">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSStop" nillable="true" type="tns:GTFSStop"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSStop">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSStop" nillable="true" type="tns:ArrayOfGTFSStop"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSStopTime">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="arrivalDay" type="xsd:int" use="required"/>
+						<attribute name="arrivalTime" type="xsd:string" use="optional"/>
+						<attribute name="deadlineDay" type="xsd:int" use="required"/>
+						<attribute name="deadlineTime" type="xsd:string" use="optional"/>
+						<attribute name="departureDay" type="xsd:int" use="required"/>
+						<attribute name="departureTime" type="xsd:string" use="optional"/>
+						<attribute name="gaugeProfileC2" type="xsd:string" use="optional"/>
+						<attribute name="gaugeProfileC3" type="xsd:string" use="optional"/>
+						<attribute name="gaugeProfileP2" type="xsd:string" use="optional"/>
+						<attribute name="gaugeProfileP3" type="xsd:string" use="optional"/>
+						<attribute name="provisionDay" type="xsd:int" use="required"/>
+						<attribute name="provisionTime" type="xsd:string" use="optional"/>
+						<attribute name="routeId" type="xsd:string" use="optional"/>
+						<attribute name="shapeDistTraveled" type="xsd:int" use="required"/>
+						<attribute name="stopId" type="xsd:string" use="optional"/>
+						<attribute name="stopSequence" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSStopTime">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSStopTime" nillable="true" type="tns:GTFSStopTime"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSStopTime">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSStopTime" nillable="true" type="tns:ArrayOfGTFSStopTime"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSShape">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="routeId" type="xsd:string" use="optional"/>
+						<attribute name="shapePtLat" type="xsd:double" use="required"/>
+						<attribute name="shapePtLon" type="xsd:double" use="required"/>
+						<attribute name="shapePtSequence" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSShape">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSShape" nillable="true" type="tns:GTFSShape"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSShape">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSShape" nillable="true" type="tns:ArrayOfGTFSShape"/>
+				</sequence>
+			</complexType>
+			<complexType name="VoyageConstraint">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedCapacityPerCargoType" nillable="true" type="ns3:ArrayOfInt"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedCostsPerCargoType" nillable="true" type="ns3:ArrayOfInt"/>
+						</sequence>
+						<attribute name="fromTerminalCode" type="xsd:string" use="optional"/>
+						<attribute name="lineCode" type="xsd:string" use="optional"/>
+						<attribute name="startTime" type="xsd:dateTime" use="optional"/>
+						<attribute name="toTerminalCode" type="xsd:string" use="optional"/>
+						<attribute name="transportModeCode" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfVoyageConstraint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="VoyageConstraint" nillable="true" type="tns:VoyageConstraint"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfVoyageConstraint">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfVoyageConstraint" nillable="true" type="tns:ArrayOfVoyageConstraint"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSTransfer">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="fromRouteType" type="tns:GTFSRouteType" use="required"/>
+						<attribute name="fromStopId" type="xsd:string" use="optional"/>
+						<attribute name="toRouteType" type="tns:GTFSRouteType" use="required"/>
+						<attribute name="toStopId" type="xsd:string" use="optional"/>
+						<attribute name="transferCosts" type="xsd:int" use="required"/>
+						<attribute name="transferDistance" type="xsd:int" use="required"/>
+						<attribute name="transferTime" type="xsd:int" use="required"/>
+						<attribute name="tscId" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSTransfer">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSTransfer" nillable="true" type="tns:GTFSTransfer"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSTransfer">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSTransfer" nillable="true" type="tns:ArrayOfGTFSTransfer"/>
+				</sequence>
+			</complexType>
+			<simpleType name="GTFSRouteType">
+				<restriction base="xsd:string">
+					<enumeration value="ROAD"/>
+					<enumeration value="TRAIN"/>
+					<enumeration value="AIR"/>
+					<enumeration value="BARGE"/>
+					<enumeration value="SHORT_SEA"/>
+					<enumeration value="DEEP_SEA"/>
+				</restriction>
+			</simpleType>
+			<complexType name="ArrayOfGTFSRouteType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSRouteType" nillable="false" type="tns:GTFSRouteType"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSRouteType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSRouteType" nillable="true" type="tns:ArrayOfGTFSRouteType"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSAgency">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="agencyId" type="xsd:string" use="optional"/>
+						<attribute name="agencyName" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSAgency">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSAgency" nillable="true" type="tns:GTFSAgency"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSAgency">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSAgency" nillable="true" type="tns:ArrayOfGTFSAgency"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSCalendar">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="endDate" type="xsd:int" use="required"/>
+						<attribute name="friday" type="xsd:boolean" use="required"/>
+						<attribute name="monday" type="xsd:boolean" use="required"/>
+						<attribute name="routeId" type="xsd:string" use="optional"/>
+						<attribute name="saturday" type="xsd:boolean" use="required"/>
+						<attribute name="startDate" type="xsd:int" use="required"/>
+						<attribute name="sunday" type="xsd:boolean" use="required"/>
+						<attribute name="thursday" type="xsd:boolean" use="required"/>
+						<attribute name="tuesday" type="xsd:boolean" use="required"/>
+						<attribute name="wednesday" type="xsd:boolean" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSCalendar">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSCalendar" nillable="true" type="tns:GTFSCalendar"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSCalendar">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSCalendar" nillable="true" type="tns:ArrayOfGTFSCalendar"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSFare">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="destinationId" type="xsd:string" use="optional"/>
+						<attribute name="originId" type="xsd:string" use="optional"/>
+						<attribute name="price" type="xsd:int" use="required"/>
+						<attribute name="routeId" type="xsd:string" use="optional"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSFare">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSFare" nillable="true" type="tns:GTFSFare"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSFare">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSFare" nillable="true" type="tns:ArrayOfGTFSFare"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSError">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="errorCode" type="xsd:int" use="required"/>
+						<attribute name="errorMessage" type="xsd:string" use="optional"/>
+						<attribute name="fileName" type="xsd:string" use="optional"/>
+						<attribute name="recordNumber" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSError">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSError" nillable="true" type="tns:GTFSError"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSError">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSError" nillable="true" type="tns:ArrayOfGTFSError"/>
+				</sequence>
+			</complexType>
+			<complexType name="GTFSImportOption">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="append" type="xsd:boolean" use="required"/>
+						<attribute name="deleteRecords" type="xsd:boolean" use="required"/>
+						<attribute name="validateOnly" type="xsd:boolean" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfGTFSImportOption">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="GTFSImportOption" nillable="true" type="tns:GTFSImportOption"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfGTFSImportOption">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfGTFSImportOption" nillable="true" type="tns:ArrayOfGTFSImportOption"/>
+				</sequence>
+			</complexType>
+			<complexType name="RegularServices">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedCosts" nillable="true" type="tns:ArrayOfGTFSFare"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedRoutes" nillable="true" type="tns:ArrayOfGTFSRoute"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedServiceDays" nillable="true" type="tns:ArrayOfGTFSCalendar"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedShapes" nillable="true" type="tns:ArrayOfGTFSShape"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedStopTimes" nillable="true" type="tns:ArrayOfGTFSStopTime"/>
+							<element maxOccurs="1" minOccurs="0" name="wrappedTerminals" nillable="true" type="tns:ArrayOfGTFSStop"/>
+						</sequence>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfRegularServices">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="RegularServices" nillable="true" type="tns:RegularServices"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfRegularServices">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfRegularServices" nillable="true" type="tns:ArrayOfRegularServices"/>
+				</sequence>
+			</complexType>
+			<complexType name="Station">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence>
+							<element maxOccurs="1" minOccurs="0" name="wrappedStationTimeEvents" nillable="true" type="tns:ArrayOfStationTimeEvent"/>
+							<element maxOccurs="1" minOccurs="0" name="stopOff" nillable="true" type="tns:Location"/>
+						</sequence>
+						<attribute name="accTime" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfStation">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="Station" nillable="true" type="tns:Station"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfStation">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfStation" nillable="true" type="tns:ArrayOfStation"/>
+				</sequence>
+			</complexType>
+			<complexType name="XProperties">
+				<complexContent>
+					<extension base="ns2:TransientVO">
+						<sequence/>
+						<attribute name="poolSize" type="xsd:int" use="required"/>
+					</extension>
+				</complexContent>
+			</complexType>
+			<complexType name="ArrayOfXProperties">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="XProperties" nillable="true" type="tns:XProperties"/>
+				</sequence>
+			</complexType>
+			<complexType name="ArrayOfArrayOfXProperties">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ArrayOfXProperties" nillable="true" type="tns:ArrayOfXProperties"/>
+				</sequence>
+			</complexType>
+		</schema>
+		<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://types.xintermodal.xserver.ptvag.com" xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://xintermodal.xserver.ptvag.com" xmlns:ns2="http://baseservices.service.jabba.ptvag.com" xmlns:ns1="http://xintermodal.xserver.ptvag.com" xmlns:ns0="http://types.xintermodal.xserver.ptvag.com" xmlns:common="http://common.xserver.ptvag.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://types.xintermodal.xserver.ptvag.com">
+			<complexType name="activateTimeTables">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="activateTimeTablesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfGTFSError"/>
+				</sequence>
+			</complexType>
+			<complexType name="calculateRoute">
+				<sequence>
+					<element name="RoutingRequest_1" nillable="true" type="ns3:RoutingRequest"/>
+					<element name="CallerContext_2" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="calculateRouteResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:RoutingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="determineTransportAlternatives">
+				<sequence>
+					<element name="TransportAlternativesRequest_1" nillable="true" type="ns3:TransportAlternativesRequest"/>
+					<element name="CallerContext_2" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="determineTransportAlternativesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfRoutingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="doLineScheduling">
+				<sequence>
+					<element name="SchedulingRequest_1" nillable="true" type="ns3:SchedulingRequest"/>
+					<element name="CallerContext_2" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="doLineSchedulingResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:SchedulingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="getAllLines">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getAllLinesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:RegularServices"/>
+				</sequence>
+			</complexType>
+			<complexType name="getOperators">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getOperatorsResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfOperator"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleRoutingRequest">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleRoutingRequestResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:RoutingRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleRoutingRequestTSC">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleRoutingRequestTSCResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:RoutingRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleRoutingResponse">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleRoutingResponseResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:RoutingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleRoutingResponseTSC">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleRoutingResponseTSCResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:RoutingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleSchedulingRequest">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleSchedulingRequestResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:SchedulingRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleSchedulingResponse">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleSchedulingResponseResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:SchedulingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleTARequest">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleTARequestResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:TransportAlternativesRequest"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleTAResponse">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getSampleTAResponseResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfRoutingResponse"/>
+				</sequence>
+			</complexType>
+			<complexType name="getTerminals">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getTerminalsResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfLocation"/>
+				</sequence>
+			</complexType>
+			<complexType name="getTransportModes">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getTransportModesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfTransportMode"/>
+				</sequence>
+			</complexType>
+			<complexType name="getTruckLines">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getTruckLinesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:RegularServices"/>
+				</sequence>
+			</complexType>
+			<complexType name="getXProperties">
+				<sequence>
+					<element name="CallerContext_1" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="getXPropertiesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:XProperties"/>
+				</sequence>
+			</complexType>
+			<complexType name="importAgencies">
+				<sequence>
+					<element name="ArrayOfGTFSAgency_1" nillable="true" type="ns3:ArrayOfGTFSAgency"/>
+					<element name="GTFSImportOption_2" nillable="true" type="ns3:GTFSImportOption"/>
+					<element name="CallerContext_3" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="importAgenciesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfGTFSError"/>
+				</sequence>
+			</complexType>
+			<complexType name="importAirTimetables">
+				<sequence>
+					<element name="GTFSImportOption_1" nillable="true" type="ns3:GTFSImportOption"/>
+					<element name="String_2" nillable="true" type="string"/>
+					<element name="String_3" nillable="true" type="string"/>
+					<element name="CallerContext_4" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="importAirTimetablesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfGTFSError"/>
+				</sequence>
+			</complexType>
+			<complexType name="importTerminals">
+				<sequence>
+					<element name="ArrayOfGTFSStop_1" nillable="true" type="ns3:ArrayOfGTFSStop"/>
+					<element name="GTFSImportOption_2" nillable="true" type="ns3:GTFSImportOption"/>
+					<element name="CallerContext_3" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="importTerminalsResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfGTFSError"/>
+				</sequence>
+			</complexType>
+			<complexType name="importTimeTables">
+				<sequence>
+					<element name="ArrayOfGTFSRoute_1" nillable="true" type="ns3:ArrayOfGTFSRoute"/>
+					<element name="ArrayOfGTFSStopTime_2" nillable="true" type="ns3:ArrayOfGTFSStopTime"/>
+					<element name="ArrayOfGTFSCalendar_3" nillable="true" type="ns3:ArrayOfGTFSCalendar"/>
+					<element name="ArrayOfGTFSFare_4" nillable="true" type="ns3:ArrayOfGTFSFare"/>
+					<element name="ArrayOfGTFSShape_5" nillable="true" type="ns3:ArrayOfGTFSShape"/>
+					<element name="GTFSImportOption_6" nillable="true" type="ns3:GTFSImportOption"/>
+					<element name="CallerContext_7" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="importTimeTablesResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfGTFSError"/>
+				</sequence>
+			</complexType>
+			<complexType name="importTransfers">
+				<sequence>
+					<element name="ArrayOfGTFSTransfer_1" nillable="true" type="ns3:ArrayOfGTFSTransfer"/>
+					<element name="GTFSImportOption_2" nillable="true" type="ns3:GTFSImportOption"/>
+					<element name="CallerContext_3" nillable="true" type="ns2:CallerContext"/>
+				</sequence>
+			</complexType>
+			<complexType name="importTransfersResponse">
+				<sequence>
+					<element name="result" nillable="true" type="ns3:ArrayOfGTFSError"/>
+				</sequence>
+			</complexType>
+			<element name="activateTimeTables" type="tns:activateTimeTables"/>
+			<element name="activateTimeTablesResponse" type="tns:activateTimeTablesResponse"/>
+			<element name="calculateRoute" type="tns:calculateRoute"/>
+			<element name="calculateRouteResponse" type="tns:calculateRouteResponse"/>
+			<element name="determineTransportAlternatives" type="tns:determineTransportAlternatives"/>
+			<element name="determineTransportAlternativesResponse" type="tns:determineTransportAlternativesResponse"/>
+			<element name="doLineScheduling" type="tns:doLineScheduling"/>
+			<element name="doLineSchedulingResponse" type="tns:doLineSchedulingResponse"/>
+			<element name="getAllLines" type="tns:getAllLines"/>
+			<element name="getAllLinesResponse" type="tns:getAllLinesResponse"/>
+			<element name="getOperators" type="tns:getOperators"/>
+			<element name="getOperatorsResponse" type="tns:getOperatorsResponse"/>
+			<element name="getSampleRoutingRequest" type="tns:getSampleRoutingRequest"/>
+			<element name="getSampleRoutingRequestResponse" type="tns:getSampleRoutingRequestResponse"/>
+			<element name="getSampleRoutingRequestTSC" type="tns:getSampleRoutingRequestTSC"/>
+			<element name="getSampleRoutingRequestTSCResponse" type="tns:getSampleRoutingRequestTSCResponse"/>
+			<element name="getSampleRoutingResponse" type="tns:getSampleRoutingResponse"/>
+			<element name="getSampleRoutingResponseResponse" type="tns:getSampleRoutingResponseResponse"/>
+			<element name="getSampleRoutingResponseTSC" type="tns:getSampleRoutingResponseTSC"/>
+			<element name="getSampleRoutingResponseTSCResponse" type="tns:getSampleRoutingResponseTSCResponse"/>
+			<element name="getSampleSchedulingRequest" type="tns:getSampleSchedulingRequest"/>
+			<element name="getSampleSchedulingRequestResponse" type="tns:getSampleSchedulingRequestResponse"/>
+			<element name="getSampleSchedulingResponse" type="tns:getSampleSchedulingResponse"/>
+			<element name="getSampleSchedulingResponseResponse" type="tns:getSampleSchedulingResponseResponse"/>
+			<element name="getSampleTARequest" type="tns:getSampleTARequest"/>
+			<element name="getSampleTARequestResponse" type="tns:getSampleTARequestResponse"/>
+			<element name="getSampleTAResponse" type="tns:getSampleTAResponse"/>
+			<element name="getSampleTAResponseResponse" type="tns:getSampleTAResponseResponse"/>
+			<element name="getTerminals" type="tns:getTerminals"/>
+			<element name="getTerminalsResponse" type="tns:getTerminalsResponse"/>
+			<element name="getTransportModes" type="tns:getTransportModes"/>
+			<element name="getTransportModesResponse" type="tns:getTransportModesResponse"/>
+			<element name="getTruckLines" type="tns:getTruckLines"/>
+			<element name="getTruckLinesResponse" type="tns:getTruckLinesResponse"/>
+			<element name="getXProperties" type="tns:getXProperties"/>
+			<element name="getXPropertiesResponse" type="tns:getXPropertiesResponse"/>
+			<element name="importAgencies" type="tns:importAgencies"/>
+			<element name="importAgenciesResponse" type="tns:importAgenciesResponse"/>
+			<element name="importAirTimetables" type="tns:importAirTimetables"/>
+			<element name="importAirTimetablesResponse" type="tns:importAirTimetablesResponse"/>
+			<element name="importTerminals" type="tns:importTerminals"/>
+			<element name="importTerminalsResponse" type="tns:importTerminalsResponse"/>
+			<element name="importTimeTables" type="tns:importTimeTables"/>
+			<element name="importTimeTablesResponse" type="tns:importTimeTablesResponse"/>
+			<element name="importTransfers" type="tns:importTransfers"/>
+			<element name="importTransfersResponse" type="tns:importTransfersResponse"/>
+		</schema>
+	</types>
+	<message name="DatabaseException">
+		<part element="ns3:DatabaseException" name="DatabaseException"/>
+	</message>
+	<message name="XIntermodalWS_getSampleRoutingRequest">
+		<part element="ns0:getSampleRoutingRequest" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_determineTransportAlternativesResponse">
+		<part element="ns0:determineTransportAlternativesResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleRoutingRequestTSCResponse">
+		<part element="ns0:getSampleRoutingRequestTSCResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_determineTransportAlternatives">
+		<part element="ns0:determineTransportAlternatives" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleSchedulingResponse">
+		<part element="ns0:getSampleSchedulingResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleRoutingResponseTSCResponse">
+		<part element="ns0:getSampleRoutingResponseTSCResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_activateTimeTables">
+		<part element="ns0:activateTimeTables" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleTAResponseResponse">
+		<part element="ns0:getSampleTAResponseResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getXPropertiesResponse">
+		<part element="ns0:getXPropertiesResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getOperatorsResponse">
+		<part element="ns0:getOperatorsResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalException">
+		<part element="ns1:XIntermodalException" name="XIntermodalException"/>
+	</message>
+	<message name="XIntermodalWS_importTransfersResponse">
+		<part element="ns0:importTransfersResponse" name="parameters"/>
+	</message>
+	<message name="OptimisticRollbackException">
+		<part element="ns3:OptimisticRollbackException" name="OptimisticRollbackException"/>
+	</message>
+	<message name="UnexpectedException">
+		<part element="ns3:UnexpectedException" name="UnexpectedException"/>
+	</message>
+	<message name="XIntermodalWS_getSampleRoutingRequestTSC">
+		<part element="ns0:getSampleRoutingRequestTSC" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleRoutingResponse">
+		<part element="ns0:getSampleRoutingResponse" name="parameters"/>
+	</message>
+	<message name="ConstraintViolationException">
+		<part element="ns3:ConstraintViolationException" name="ConstraintViolationException"/>
+	</message>
+	<message name="XIntermodalWS_getTruckLinesResponse">
+		<part element="ns0:getTruckLinesResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_doLineSchedulingResponse">
+		<part element="ns0:doLineSchedulingResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_calculateRouteResponse">
+		<part element="ns0:calculateRouteResponse" name="parameters"/>
+	</message>
+	<message name="TableNotFoundException">
+		<part element="ns3:TableNotFoundException" name="TableNotFoundException"/>
+	</message>
+	<message name="XIntermodalWS_getSampleRoutingResponseResponse">
+		<part element="ns0:getSampleRoutingResponseResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importTerminalsResponse">
+		<part element="ns0:importTerminalsResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getXProperties">
+		<part element="ns0:getXProperties" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importAgenciesResponse">
+		<part element="ns0:importAgenciesResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleSchedulingResponseResponse">
+		<part element="ns0:getSampleSchedulingResponseResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getTerminalsResponse">
+		<part element="ns0:getTerminalsResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getTransportModesResponse">
+		<part element="ns0:getTransportModesResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleTARequestResponse">
+		<part element="ns0:getSampleTARequestResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getOperators">
+		<part element="ns0:getOperators" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleRoutingRequestResponse">
+		<part element="ns0:getSampleRoutingRequestResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importAirTimetablesResponse">
+		<part element="ns0:importAirTimetablesResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_calculateRoute">
+		<part element="ns0:calculateRoute" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importAgencies">
+		<part element="ns0:importAgencies" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleSchedulingRequestResponse">
+		<part element="ns0:getSampleSchedulingRequestResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleRoutingResponseTSC">
+		<part element="ns0:getSampleRoutingResponseTSC" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleTAResponse">
+		<part element="ns0:getSampleTAResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importTransfers">
+		<part element="ns0:importTransfers" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getAllLines">
+		<part element="ns0:getAllLines" name="parameters"/>
+	</message>
+	<message name="XServiceException">
+		<part element="ns2:XServiceException" name="XServiceException"/>
+	</message>
+	<message name="XIntermodalWS_getTransportModes">
+		<part element="ns0:getTransportModes" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_doLineScheduling">
+		<part element="ns0:doLineScheduling" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleTARequest">
+		<part element="ns0:getSampleTARequest" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getTruckLines">
+		<part element="ns0:getTruckLines" name="parameters"/>
+	</message>
+	<message name="SystemException">
+		<part element="ns3:SystemException" name="SystemException"/>
+	</message>
+	<message name="XIntermodalWS_getTerminals">
+		<part element="ns0:getTerminals" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importTerminals">
+		<part element="ns0:importTerminals" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importTimeTables">
+		<part element="ns0:importTimeTables" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_activateTimeTablesResponse">
+		<part element="ns0:activateTimeTablesResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getAllLinesResponse">
+		<part element="ns0:getAllLinesResponse" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_getSampleSchedulingRequest">
+		<part element="ns0:getSampleSchedulingRequest" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importAirTimetables">
+		<part element="ns0:importAirTimetables" name="parameters"/>
+	</message>
+	<message name="XIntermodalWS_importTimeTablesResponse">
+		<part element="ns0:importTimeTablesResponse" name="parameters"/>
+	</message>
+	<portType name="XIntermodalWS">
+		<operation name="activateTimeTables">
+			<input message="tns:XIntermodalWS_activateTimeTables"/>
+			<output message="tns:XIntermodalWS_activateTimeTablesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="calculateRoute">
+			<input message="tns:XIntermodalWS_calculateRoute"/>
+			<output message="tns:XIntermodalWS_calculateRouteResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="determineTransportAlternatives">
+			<input message="tns:XIntermodalWS_determineTransportAlternatives"/>
+			<output message="tns:XIntermodalWS_determineTransportAlternativesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="doLineScheduling">
+			<input message="tns:XIntermodalWS_doLineScheduling"/>
+			<output message="tns:XIntermodalWS_doLineSchedulingResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getAllLines">
+			<input message="tns:XIntermodalWS_getAllLines"/>
+			<output message="tns:XIntermodalWS_getAllLinesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getOperators">
+			<input message="tns:XIntermodalWS_getOperators"/>
+			<output message="tns:XIntermodalWS_getOperatorsResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getSampleRoutingRequest">
+			<input message="tns:XIntermodalWS_getSampleRoutingRequest"/>
+			<output message="tns:XIntermodalWS_getSampleRoutingRequestResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getSampleRoutingRequestTSC">
+			<input message="tns:XIntermodalWS_getSampleRoutingRequestTSC"/>
+			<output message="tns:XIntermodalWS_getSampleRoutingRequestTSCResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getSampleRoutingResponse">
+			<input message="tns:XIntermodalWS_getSampleRoutingResponse"/>
+			<output message="tns:XIntermodalWS_getSampleRoutingResponseResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getSampleRoutingResponseTSC">
+			<input message="tns:XIntermodalWS_getSampleRoutingResponseTSC"/>
+			<output message="tns:XIntermodalWS_getSampleRoutingResponseTSCResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getSampleSchedulingRequest">
+			<input message="tns:XIntermodalWS_getSampleSchedulingRequest"/>
+			<output message="tns:XIntermodalWS_getSampleSchedulingRequestResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getSampleSchedulingResponse">
+			<input message="tns:XIntermodalWS_getSampleSchedulingResponse"/>
+			<output message="tns:XIntermodalWS_getSampleSchedulingResponseResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getSampleTARequest">
+			<input message="tns:XIntermodalWS_getSampleTARequest"/>
+			<output message="tns:XIntermodalWS_getSampleTARequestResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getSampleTAResponse">
+			<input message="tns:XIntermodalWS_getSampleTAResponse"/>
+			<output message="tns:XIntermodalWS_getSampleTAResponseResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getTerminals">
+			<input message="tns:XIntermodalWS_getTerminals"/>
+			<output message="tns:XIntermodalWS_getTerminalsResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getTransportModes">
+			<input message="tns:XIntermodalWS_getTransportModes"/>
+			<output message="tns:XIntermodalWS_getTransportModesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getTruckLines">
+			<input message="tns:XIntermodalWS_getTruckLines"/>
+			<output message="tns:XIntermodalWS_getTruckLinesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="getXProperties">
+			<input message="tns:XIntermodalWS_getXProperties"/>
+			<output message="tns:XIntermodalWS_getXPropertiesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="importAgencies">
+			<input message="tns:XIntermodalWS_importAgencies"/>
+			<output message="tns:XIntermodalWS_importAgenciesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="importAirTimetables">
+			<input message="tns:XIntermodalWS_importAirTimetables"/>
+			<output message="tns:XIntermodalWS_importAirTimetablesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="importTerminals">
+			<input message="tns:XIntermodalWS_importTerminals"/>
+			<output message="tns:XIntermodalWS_importTerminalsResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="importTimeTables">
+			<input message="tns:XIntermodalWS_importTimeTables"/>
+			<output message="tns:XIntermodalWS_importTimeTablesResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+		<operation name="importTransfers">
+			<input message="tns:XIntermodalWS_importTransfers"/>
+			<output message="tns:XIntermodalWS_importTransfersResponse"/>
+			<fault message="tns:XServiceException" name="XServiceException"/>
+			<fault message="tns:TableNotFoundException" name="TableNotFoundException"/>
+			<fault message="tns:UnexpectedException" name="UnexpectedException"/>
+			<fault message="tns:SystemException" name="SystemException"/>
+			<fault message="tns:OptimisticRollbackException" name="OptimisticRollbackException"/>
+			<fault message="tns:ConstraintViolationException" name="ConstraintViolationException"/>
+			<fault message="tns:DatabaseException" name="DatabaseException"/>
+			<fault message="tns:XIntermodalException" name="XIntermodalException"/>
+		</operation>
+	</portType>
+	<binding name="XIntermodalWSBinding" type="tns:XIntermodalWS">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="activateTimeTables">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="calculateRoute">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="determineTransportAlternatives">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="doLineScheduling">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getAllLines">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getOperators">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getSampleRoutingRequest">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getSampleRoutingRequestTSC">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getSampleRoutingResponse">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getSampleRoutingResponseTSC">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getSampleSchedulingRequest">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getSampleSchedulingResponse">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getSampleTARequest">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getSampleTAResponse">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getTerminals">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getTransportModes">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getTruckLines">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getXProperties">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="importAgencies">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="importAirTimetables">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="importTerminals">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="importTimeTables">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="importTransfers">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="XServiceException">
+				<soap:fault name="XServiceException" use="literal"/>
+			</fault>
+			<fault name="TableNotFoundException">
+				<soap:fault name="TableNotFoundException" use="literal"/>
+			</fault>
+			<fault name="UnexpectedException">
+				<soap:fault name="UnexpectedException" use="literal"/>
+			</fault>
+			<fault name="SystemException">
+				<soap:fault name="SystemException" use="literal"/>
+			</fault>
+			<fault name="OptimisticRollbackException">
+				<soap:fault name="OptimisticRollbackException" use="literal"/>
+			</fault>
+			<fault name="ConstraintViolationException">
+				<soap:fault name="ConstraintViolationException" use="literal"/>
+			</fault>
+			<fault name="DatabaseException">
+				<soap:fault name="DatabaseException" use="literal"/>
+			</fault>
+			<fault name="XIntermodalException">
+				<soap:fault name="XIntermodalException" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+	<service name="XIntermodalWSService">
+		<port binding="tns:XIntermodalWSBinding" name="XIntermodalWSPort">
+			<soap:address location="http://80.146.239.130:50160/xintermodal/ws/XIntermodal"/>
+		</port>
+	</service>
+</definitions>

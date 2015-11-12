@@ -1,0 +1,11 @@
+<vbox vflex="1" hflex="1" align="center" pack="center" spacing="20px" apply="main.java.nl.tue.ieis.get.control.MainViewController">
+	<borderlayout hflex="1" vflex="1">
+		<east width="340px" id="activityEast" border="none" collapsible="true" splittable="true" title="Task Handler">
+			<include src="/gui/activityList.zul"/>
+		</east>
+		<center id="osmMapCenter" autoscroll="true">
+			 <include id="mapZul" src="/gui/map.zul"/>
+		</center>
+	</borderlayout>
+	<timer id="timer" delay="2000" onClientInfo="self.start()" repeats="true"/>
+</vbox>

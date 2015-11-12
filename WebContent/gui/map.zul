@@ -1,0 +1,27 @@
+<borderlayout vflex="1" hflex="1" apply="main.java.nl.tue.ieis.get.control.MapController">
+	<center id="mapCenter">
+		<div>
+   			<script type="text/javascript" content="zk.googleAPIkey='AIzaSyBNISs91WJwx61nPcPdjUW4VHRwnTGZ9u8'" />
+         	<gmaps version="3.9" id="gmaps"  height="900px" showZoomCtrl="true" showLargeCtrl="true" style="margin-top: -15px;">
+				<attribute name="onMapClick">
+            		if (event.getReference() instanceof org.zkoss.gmaps.Gmarker) {
+                		boolean open = !((org.zkoss.gmaps.Gmarker)event.getReference()).isOpen();
+                		event.getReference().setOpen(open);
+                		if (!open)
+                    		gmaps.closeInfo();
+            		}
+        		</attribute>
+			</gmaps>
+   		</div>
+	</center>
+	<south id="progressBarSection" visible="false" collapsible="true" splittable="true" autoscroll="true" height="33%;">
+		<div>
+			<label id="curr_step" value="0" />
+	        <progressmeter id="curr_met" width="90%" style="margin: 3px;"/>
+	        <div style="margin-top: 5px;">
+				<image class="processImageStyle" id="processImage" tooltiptext="process model image" />
+			</div>
+	       	<timer id="mapTimer" delay="3000" onClientInfo="self.start()" repeats="true"/>
+        </div>
+    </south>	
+</borderlayout>

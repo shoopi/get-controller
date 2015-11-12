@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flightTrace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="FlightDiversion.xsd">
+  <flightId>1234</flightId>
+  <departure>
+    <origin>str1234</origin>
+    <departurelatitude>3.1415926535</departurelatitude>
+    <departurelongitude>3.1415926535</departurelongitude>
+  </departure>
+  <arrival>
+    <destination>Frankfurt</destination>
+    <arrivallatitude>50.03333</arrivallatitude>
+    <arrivallongitude>8.57056</arrivallongitude>
+  </arrival>
+  <timestamp>2012-12-13T12:12:12</timestamp>
+  <aircraftId>1234</aircraftId>
+  <certainty>0.89</certainty>
+  <flightNumber>str1234</flightNumber>
+  <latitude>50.1415926535</latitude>
+  <longitude>8.1415926535</longitude>
+</flightTrace>

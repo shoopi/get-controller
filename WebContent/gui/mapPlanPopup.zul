@@ -1,0 +1,135 @@
+<?page id="GETServiceController" title="GET Service Controller" cacheable="true"?>
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<?link href="/imgs/favicon.ico" rel="shortcut icon" type="image/x-icon" ?>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<borderlayout id="borderLayout"  vflex="1" hflex="1" apply="main.java.nl.tue.ieis.get.control.MapPopupController">		
+		<north height="130px" border="none">
+			<include src="/gui/banner.zul" />
+		</north>
+		<center autoscroll="true" title="Map" hflex="1" vflex="1">
+			<div vflex="1" hflex="1">
+				<script type="text/javascript" content="zk.googleAPIkey='AIzaSyBNISs91WJwx61nPcPdjUW4VHRwnTGZ9u8'" />
+	    		<gmaps version="3.9" id="gmaps" showSmallCtrl="true" vflex="1" hflex="1">
+		    		<attribute name="onMapClick">
+	            		if (event.getReference() instanceof org.zkoss.gmaps.Gmarker) {
+	                		boolean open = !((org.zkoss.gmaps.Gmarker)event.getReference()).isOpen();
+	                		event.getReference().setOpen(open);
+	                		if (!open)
+	                    		gmaps.closeInfo();
+	            		}
+	        		</attribute>
+        		</gmaps>
+	    		<timer id="mapTimer" delay="3000" repeats="true"/>
+    		</div>
+		</center>
+		<west width="260px" collapsible="true" splittable="true" minsize="300" title="Alternative routes" id="westLayout">
+			<vlayout>
+				<grid id="alternativeList" hflex="1" vflex="1" sclass="sidebar" emptyMessage="No Route" style="cursor:pointer">
+					<columns>
+						<column/>
+					</columns>
+					<rows/>
+				</grid>
+			</vlayout>
+        </west>
+        <south id="southLayout">
+        	<vlayout>
+	        	<listbox id="resultListBox" emptyMessage="No route selected" style="height: 180px; overflow-y: scroll;" context="selectRoute">
+					<listhead>
+						<listheader label="Name"/>
+			    		<listheader label="Total Cost"/>
+			    		<listheader label="TotalTravelTime"/>
+			    		<listheader label="TotalDistance"/>
+			    		<listheader label="Total Transfer"/>
+			    		<listheader label="Start" sort="auto"/>
+			    		<listheader label="Total Emission"/>
+			    		<!--  <listheader label="Stations" />-->
+					</listhead>
+					<template name="model">
+						<listitem style="cursor:pointer" context="selectRoute">
+			        		<listcell label="${each.name}"></listcell>
+			        		<listcell label="${each.totalCost}"></listcell>
+			        		<listcell label="${each.totalTravelTime}"></listcell>
+			        		<listcell label="${each.totalDistance}"></listcell>
+			        		<listcell label="${each.transfers}"></listcell>
+			        		<listcell label="${each.start}"></listcell>
+			        		<listcell label="${each.totalEmission.carbonDioxide}"></listcell>
+			        		<!--  <listcell label="${each.stations}"></listcell>-->
+			    		</listitem>
+					</template>
+				</listbox>
+				<menupopup id="selectRoute" >
+	    			<menuitem image="/imgs/add.png" label="Select Route"  id="addMenuItem"/>
+   				</menupopup>
+				<vbox align="center" sclass="footer" vflex="1" hflex="1">
+					Prototype of FP-7 GET Service Platform.
+					<a href="http://www.getservice-project.eu">More info</a>
+				</vbox>
+			</vlayout>
+        </south>
+        <east id="eastLayout" open="false" collapsible="true" minsize="300" title="Available Assets" width="350px">
+        	<vlayout hflex="1" vflex="1">
+        		<grid>
+        			<auxhead>
+           		 		<auxheader colspan="2" label="Process Properties" style="text-align: center;"/>
+        			</auxhead>
+	        		<columns>
+						<column width="110px" label="# of Instances"/>
+						<column label="Process Model"/>
+	       			</columns>
+	        		<rows>
+	        			<row>
+	        				<vlayout>
+	                			<!--  <textbox tabindex="1" id="idTextBox" constraint="no empty" width="230px" mold="rounded" disabled="true"/> -->
+	                			<spinner id="instanceCounter" mold="rounded" inplace="true" value="1" width="80px" constraint="no empty,min 1 max 20: between 1 and 20"/>
+	                		</vlayout>
+	                		<vlayout>
+	                			<combobox tabindex="1" id="processComboBox" constraint="no empty" width="230px" mold="rounded" autodrop="true" readonly="true">
+	                				<template name="model">
+	        							<comboitem label="${each}" />
+	    							</template>
+	                			</combobox>
+	                		</vlayout>
+	           			</row>
+	           			<row>
+	           				<cell colspan="2">
+	           					<button id="selectProcessModelBtn" label="Run Transportation Process" style="myButton"/>
+	           				</cell>
+	           			</row>
+	           		</rows>
+        		</grid>
+
+				<grid id="truckList" hflex="1" vflex="3" sclass="sidebar" emptyMessage="No Truck" style="cursor:pointer">
+					<auxhead>
+           		 		<auxheader colspan="2" id="truckListHeader" label="Update Status" style="text-align: center;"/>
+        			</auxhead>
+					<columns>
+						<column hflex="1" label="Source ID" align="center" sort="auto"/>
+						<column hflex="2" label="Distance (KM)" align="center" sort="auto" sortDirection="ascending">
+							<!--  <separator orient="vertical" spacing="3px" /> -->
+                    		<image src="/imgs/help.png" tooltip="distanceTooltip" style="cursor: help" />
+                   		</column>
+					</columns>
+					<rows/>
+				</grid>
+   				<popup id="distanceTooltip" width="300px">
+        			<html><![CDATA[
+			            Distance is calculated based on the <span style="color: red;">source address </span> and may not be completely accurate.
+        			]]></html>
+   		 		</popup>
+   		 		<grid hflex="1" vflex="1" sclass="sidebar" >
+   		 			<columns>
+   		 				<column hflex="1"/>
+   		 				<column hflex="2"/>
+   		 			</columns>
+   		 			<rows>
+   		 				<row>
+   		 					<textbox id="selectedTruckTextbox" width="70px" mold="rounded" name="selectedTruckTextbox" />
+   		 					<button id="selectAssetButton" label="Select Asset" disabled="true" style="myButton"/>
+   		 				</row>
+   		 			</rows>
+   		 		</grid>
+			</vlayout>
+        </east>
+	</borderlayout>
+</zk>

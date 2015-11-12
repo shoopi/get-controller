@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TransportDeadlineExpired xmlns="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="TransportDeadlineExpired.xsd">
+  <operatorId>1849</operatorId>
+  <latitude>0.0</latitude>
+  <longitude>0.0</longitude>
+  <distanceRemaining>0</distanceRemaining>
+  <nodeDeadline>2001-12-31T12:00:00</nodeDeadline>
+  <timestamp>2001-12-31T12:00:00</timestamp>
+</TransportDeadlineExpired>

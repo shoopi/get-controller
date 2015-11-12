@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="PositionUpdate.xsd"
+	targetNamespace="PositionUpdate.xsd" elementFormDefault="qualified">
+
+	<xs:element name="PositionUpdate">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operatorId" type="xs:integer"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="currentLatitude" type="xs:double"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="currentLongitude" type="xs:double"
+					minOccurs="1" maxOccurs="1" />
+				<!-- Extend with altitude? -->
+				<xs:element name="previousLatitude" type="xs:double"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="previousLongitude" type="xs:double"
+					minOccurs="1" maxOccurs="1" />
+				<!-- Extend with altitude? -->
+				<!-- the distance is meters -->
+				<xs:element name="distance" type="xs:long" />
+				<!-- duration is given as milliseconds -->
+				<xs:element name="duration" type="xs:long" />
+				<xs:element name="speed" type="xs:long" />
+				<xs:element name="timestamp" type="xs:dateTime"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="startTime" type="xs:dateTime"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

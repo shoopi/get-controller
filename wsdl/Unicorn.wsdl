@@ -1,0 +1,973 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax29="http://json.org/xsd" xmlns:ax27="http://io.java/xsd" xmlns:ns="http://hpi.de" xmlns:ax25="http://utils.semantic.unicorn.hpi.de/xsd" xmlns:ax23="http://xml.importer.unicorn.hpi.de/xsd" xmlns:ax21="http://exception.unicorn.hpi.de/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax211="http://text.java/xsd" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://hpi.de">
+	<wsdl:documentation>EventProcessingPlatformWebservice</wsdl:documentation>
+	<wsdl:types>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://text.java/xsd">
+			<xs:complexType name="ParseException">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="errorOffset" type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://exception.unicorn.hpi.de/xsd">
+			<xs:complexType name="DuplicatedSchemaException">
+				<xs:sequence/>
+			</xs:complexType>
+			<xs:complexType name="UnparsableException">
+				<xs:sequence/>
+			</xs:complexType>
+			<xs:complexType name="EventTypeNotFoundException">
+				<xs:sequence/>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xml.importer.unicorn.hpi.de/xsd">
+			<xs:complexType name="XMLParsingException">
+				<xs:sequence/>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://utils.semantic.unicorn.hpi.de/xsd">
+			<xs:complexType name="ParsingMappingException">
+				<xs:sequence/>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://io.java/xsd">
+			<xs:complexType name="IOException">
+				<xs:sequence/>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:ax28="http://io.java/xsd" xmlns:ax26="http://utils.semantic.unicorn.hpi.de/xsd" xmlns:ax24="http://xml.importer.unicorn.hpi.de/xsd" xmlns:ax22="http://exception.unicorn.hpi.de/xsd" xmlns:ax212="http://text.java/xsd" xmlns:ax210="http://json.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://hpi.de">
+			<xs:import namespace="http://exception.unicorn.hpi.de/xsd"/>
+			<xs:import namespace="http://xml.importer.unicorn.hpi.de/xsd"/>
+			<xs:import namespace="http://utils.semantic.unicorn.hpi.de/xsd"/>
+			<xs:import namespace="http://io.java/xsd"/>
+			<xs:import namespace="http://json.org/xsd"/>
+			<xs:import namespace="http://text.java/xsd"/>
+			<xs:element name="EventProcessingPlatformWebserviceDuplicatedSchemaException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="DuplicatedSchemaException" nillable="true" type="ax21:DuplicatedSchemaException"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EventProcessingPlatformWebserviceUnparsableException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="UnparsableException" nillable="true" type="ax21:UnparsableException"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="registerEventType">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="xsd" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="schemaName" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="timestampName" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EventProcessingPlatformWebserviceXMLParsingException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="XMLParsingException" nillable="true" type="ax23:XMLParsingException"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="importEvents">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="xml" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getAllEventTypes">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getAllEventTypesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EventProcessingPlatformWebserviceEventTypeNotFoundException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="EventTypeNotFoundException" nillable="true" type="ax21:EventTypeNotFoundException"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getEventTypeXSD">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="eventTypeName" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getEventTypeXSDResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unregisterEventType">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="schemaName" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unregisterEventTypeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="storeRouteInSemanticDB">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="xml" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="storeRouteInSemanticDBResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EventProcessingPlatformWebserviceParsingMappingException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="ParsingMappingException" nillable="true" type="ax25:ParsingMappingException"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="importSemanticEventMapping">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="mappingContent" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="associatedEventTypeName" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="importSemanticEventMappingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EventProcessingPlatformWebserviceIOException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="IOException" nillable="true" type="ax27:IOException"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EventProcessingPlatformWebserviceJSONException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="JSONException" nillable="true" type="ax29:JSONException"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EventProcessingPlatformWebserviceParseException">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="ParseException" nillable="true" type="ax212:ParseException"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="storeRoute">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="json" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="registerQueryForQueue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="title" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="queryString" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="eMail" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="registerQueryForQueueResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unregisterQueryFromQueue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unregisterQueryFromQueueResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unregisterQueriesFromQueue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unregisterQueriesFromQueueResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" type="xs:int"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="registerEventAggregationRule">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="ruleName" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="eventTypeName" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="eventAggregationRule" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="registerEventAggregationRuleResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unregisterEventAggregationRule">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="ruleName" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="eventTypeName" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unregisterEventAggregationRuleResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="registerEventCorrelationRule">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="process" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="firstEventType" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="firstAttribute" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="secondEventType" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="secondAttribute" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="registerEventCorrelationRuleResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getAttributeNames">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="eventTypeName" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getAttributeNamesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://json.org/xsd">
+			<xs:complexType name="JSONException">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="cause" nillable="true" type="xs:anyType"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="importEventsRequest">
+		<wsdl:part name="parameters" element="ns:importEvents"/>
+	</wsdl:message>
+	<wsdl:message name="importEventsResponse"/>
+	<wsdl:message name="EventProcessingPlatformWebserviceUnparsableException">
+		<wsdl:part name="parameters" element="ns:EventProcessingPlatformWebserviceUnparsableException"/>
+	</wsdl:message>
+	<wsdl:message name="EventProcessingPlatformWebserviceXMLParsingException">
+		<wsdl:part name="parameters" element="ns:EventProcessingPlatformWebserviceXMLParsingException"/>
+	</wsdl:message>
+	<wsdl:message name="unregisterEventAggregationRuleRequest">
+		<wsdl:part name="parameters" element="ns:unregisterEventAggregationRule"/>
+	</wsdl:message>
+	<wsdl:message name="unregisterEventAggregationRuleResponse">
+		<wsdl:part name="parameters" element="ns:unregisterEventAggregationRuleResponse"/>
+	</wsdl:message>
+	<wsdl:message name="registerEventTypeRequest">
+		<wsdl:part name="parameters" element="ns:registerEventType"/>
+	</wsdl:message>
+	<wsdl:message name="registerEventTypeResponse"/>
+	<wsdl:message name="EventProcessingPlatformWebserviceDuplicatedSchemaException">
+		<wsdl:part name="parameters" element="ns:EventProcessingPlatformWebserviceDuplicatedSchemaException"/>
+	</wsdl:message>
+	<wsdl:message name="unregisterEventTypeRequest">
+		<wsdl:part name="parameters" element="ns:unregisterEventType"/>
+	</wsdl:message>
+	<wsdl:message name="unregisterEventTypeResponse">
+		<wsdl:part name="parameters" element="ns:unregisterEventTypeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="unregisterQueryFromQueueRequest">
+		<wsdl:part name="parameters" element="ns:unregisterQueryFromQueue"/>
+	</wsdl:message>
+	<wsdl:message name="unregisterQueryFromQueueResponse">
+		<wsdl:part name="parameters" element="ns:unregisterQueryFromQueueResponse"/>
+	</wsdl:message>
+	<wsdl:message name="importSemanticEventMappingRequest">
+		<wsdl:part name="parameters" element="ns:importSemanticEventMapping"/>
+	</wsdl:message>
+	<wsdl:message name="importSemanticEventMappingResponse">
+		<wsdl:part name="parameters" element="ns:importSemanticEventMappingResponse"/>
+	</wsdl:message>
+	<wsdl:message name="EventProcessingPlatformWebserviceParsingMappingException">
+		<wsdl:part name="parameters" element="ns:EventProcessingPlatformWebserviceParsingMappingException"/>
+	</wsdl:message>
+	<wsdl:message name="registerEventCorrelationRuleRequest">
+		<wsdl:part name="parameters" element="ns:registerEventCorrelationRule"/>
+	</wsdl:message>
+	<wsdl:message name="registerEventCorrelationRuleResponse">
+		<wsdl:part name="parameters" element="ns:registerEventCorrelationRuleResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getAttributeNamesRequest">
+		<wsdl:part name="parameters" element="ns:getAttributeNames"/>
+	</wsdl:message>
+	<wsdl:message name="getAttributeNamesResponse">
+		<wsdl:part name="parameters" element="ns:getAttributeNamesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="EventProcessingPlatformWebserviceEventTypeNotFoundException">
+		<wsdl:part name="parameters" element="ns:EventProcessingPlatformWebserviceEventTypeNotFoundException"/>
+	</wsdl:message>
+	<wsdl:message name="registerQueryForQueueRequest">
+		<wsdl:part name="parameters" element="ns:registerQueryForQueue"/>
+	</wsdl:message>
+	<wsdl:message name="registerQueryForQueueResponse">
+		<wsdl:part name="parameters" element="ns:registerQueryForQueueResponse"/>
+	</wsdl:message>
+	<wsdl:message name="unregisterQueriesFromQueueRequest">
+		<wsdl:part name="parameters" element="ns:unregisterQueriesFromQueue"/>
+	</wsdl:message>
+	<wsdl:message name="unregisterQueriesFromQueueResponse">
+		<wsdl:part name="parameters" element="ns:unregisterQueriesFromQueueResponse"/>
+	</wsdl:message>
+	<wsdl:message name="storeRouteInSemanticDBRequest">
+		<wsdl:part name="parameters" element="ns:storeRouteInSemanticDB"/>
+	</wsdl:message>
+	<wsdl:message name="storeRouteInSemanticDBResponse">
+		<wsdl:part name="parameters" element="ns:storeRouteInSemanticDBResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getEventTypeXSDRequest">
+		<wsdl:part name="parameters" element="ns:getEventTypeXSD"/>
+	</wsdl:message>
+	<wsdl:message name="getEventTypeXSDResponse">
+		<wsdl:part name="parameters" element="ns:getEventTypeXSDResponse"/>
+	</wsdl:message>
+	<wsdl:message name="registerEventAggregationRuleRequest">
+		<wsdl:part name="parameters" element="ns:registerEventAggregationRule"/>
+	</wsdl:message>
+	<wsdl:message name="registerEventAggregationRuleResponse">
+		<wsdl:part name="parameters" element="ns:registerEventAggregationRuleResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getAllEventTypesRequest">
+		<wsdl:part name="parameters" element="ns:getAllEventTypes"/>
+	</wsdl:message>
+	<wsdl:message name="getAllEventTypesResponse">
+		<wsdl:part name="parameters" element="ns:getAllEventTypesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="storeRouteRequest">
+		<wsdl:part name="parameters" element="ns:storeRoute"/>
+	</wsdl:message>
+	<wsdl:message name="storeRouteResponse"/>
+	<wsdl:message name="EventProcessingPlatformWebserviceIOException">
+		<wsdl:part name="parameters" element="ns:EventProcessingPlatformWebserviceIOException"/>
+	</wsdl:message>
+	<wsdl:message name="EventProcessingPlatformWebserviceJSONException">
+		<wsdl:part name="parameters" element="ns:EventProcessingPlatformWebserviceJSONException"/>
+	</wsdl:message>
+	<wsdl:message name="EventProcessingPlatformWebserviceParseException">
+		<wsdl:part name="parameters" element="ns:EventProcessingPlatformWebserviceParseException"/>
+	</wsdl:message>
+	<wsdl:portType name="EventProcessingPlatformWebservicePortType">
+		<wsdl:operation name="importEvents">
+			<wsdl:input message="ns:importEventsRequest" wsaw:Action="urn:importEvents"/>
+			<wsdl:output message="ns:importEventsResponse" wsaw:Action="urn:importEventsResponse"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceUnparsableException" name="EventProcessingPlatformWebserviceUnparsableException" wsaw:Action="urn:importEventsEventProcessingPlatformWebserviceUnparsableException"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceXMLParsingException" name="EventProcessingPlatformWebserviceXMLParsingException" wsaw:Action="urn:importEventsEventProcessingPlatformWebserviceXMLParsingException"/>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterEventAggregationRule">
+			<wsdl:input message="ns:unregisterEventAggregationRuleRequest" wsaw:Action="urn:unregisterEventAggregationRule"/>
+			<wsdl:output message="ns:unregisterEventAggregationRuleResponse" wsaw:Action="urn:unregisterEventAggregationRuleResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventType">
+			<wsdl:input message="ns:registerEventTypeRequest" wsaw:Action="urn:registerEventType"/>
+			<wsdl:output message="ns:registerEventTypeResponse" wsaw:Action="urn:registerEventTypeResponse"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceDuplicatedSchemaException" name="EventProcessingPlatformWebserviceDuplicatedSchemaException" wsaw:Action="urn:registerEventTypeEventProcessingPlatformWebserviceDuplicatedSchemaException"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceUnparsableException" name="EventProcessingPlatformWebserviceUnparsableException" wsaw:Action="urn:registerEventTypeEventProcessingPlatformWebserviceUnparsableException"/>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterEventType">
+			<wsdl:input message="ns:unregisterEventTypeRequest" wsaw:Action="urn:unregisterEventType"/>
+			<wsdl:output message="ns:unregisterEventTypeResponse" wsaw:Action="urn:unregisterEventTypeResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterQueryFromQueue">
+			<wsdl:input message="ns:unregisterQueryFromQueueRequest" wsaw:Action="urn:unregisterQueryFromQueue"/>
+			<wsdl:output message="ns:unregisterQueryFromQueueResponse" wsaw:Action="urn:unregisterQueryFromQueueResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="importSemanticEventMapping">
+			<wsdl:input message="ns:importSemanticEventMappingRequest" wsaw:Action="urn:importSemanticEventMapping"/>
+			<wsdl:output message="ns:importSemanticEventMappingResponse" wsaw:Action="urn:importSemanticEventMappingResponse"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceParsingMappingException" name="EventProcessingPlatformWebserviceParsingMappingException" wsaw:Action="urn:importSemanticEventMappingEventProcessingPlatformWebserviceParsingMappingException"/>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventCorrelationRule">
+			<wsdl:input message="ns:registerEventCorrelationRuleRequest" wsaw:Action="urn:registerEventCorrelationRule"/>
+			<wsdl:output message="ns:registerEventCorrelationRuleResponse" wsaw:Action="urn:registerEventCorrelationRuleResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getAttributeNames">
+			<wsdl:input message="ns:getAttributeNamesRequest" wsaw:Action="urn:getAttributeNames"/>
+			<wsdl:output message="ns:getAttributeNamesResponse" wsaw:Action="urn:getAttributeNamesResponse"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceEventTypeNotFoundException" name="EventProcessingPlatformWebserviceEventTypeNotFoundException" wsaw:Action="urn:getAttributeNamesEventProcessingPlatformWebserviceEventTypeNotFoundException"/>
+		</wsdl:operation>
+		<wsdl:operation name="registerQueryForQueue">
+			<wsdl:input message="ns:registerQueryForQueueRequest" wsaw:Action="urn:registerQueryForQueue"/>
+			<wsdl:output message="ns:registerQueryForQueueResponse" wsaw:Action="urn:registerQueryForQueueResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterQueriesFromQueue">
+			<wsdl:input message="ns:unregisterQueriesFromQueueRequest" wsaw:Action="urn:unregisterQueriesFromQueue"/>
+			<wsdl:output message="ns:unregisterQueriesFromQueueResponse" wsaw:Action="urn:unregisterQueriesFromQueueResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="storeRouteInSemanticDB">
+			<wsdl:input message="ns:storeRouteInSemanticDBRequest" wsaw:Action="urn:storeRouteInSemanticDB"/>
+			<wsdl:output message="ns:storeRouteInSemanticDBResponse" wsaw:Action="urn:storeRouteInSemanticDBResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getEventTypeXSD">
+			<wsdl:input message="ns:getEventTypeXSDRequest" wsaw:Action="urn:getEventTypeXSD"/>
+			<wsdl:output message="ns:getEventTypeXSDResponse" wsaw:Action="urn:getEventTypeXSDResponse"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceEventTypeNotFoundException" name="EventProcessingPlatformWebserviceEventTypeNotFoundException" wsaw:Action="urn:getEventTypeXSDEventProcessingPlatformWebserviceEventTypeNotFoundException"/>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventAggregationRule">
+			<wsdl:input message="ns:registerEventAggregationRuleRequest" wsaw:Action="urn:registerEventAggregationRule"/>
+			<wsdl:output message="ns:registerEventAggregationRuleResponse" wsaw:Action="urn:registerEventAggregationRuleResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getAllEventTypes">
+			<wsdl:input message="ns:getAllEventTypesRequest" wsaw:Action="urn:getAllEventTypes"/>
+			<wsdl:output message="ns:getAllEventTypesResponse" wsaw:Action="urn:getAllEventTypesResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="storeRoute">
+			<wsdl:input message="ns:storeRouteRequest" wsaw:Action="urn:storeRoute"/>
+			<wsdl:output message="ns:storeRouteResponse" wsaw:Action="urn:storeRouteResponse"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceIOException" name="EventProcessingPlatformWebserviceIOException" wsaw:Action="urn:storeRouteEventProcessingPlatformWebserviceIOException"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceJSONException" name="EventProcessingPlatformWebserviceJSONException" wsaw:Action="urn:storeRouteEventProcessingPlatformWebserviceJSONException"/>
+			<wsdl:fault message="ns:EventProcessingPlatformWebserviceParseException" name="EventProcessingPlatformWebserviceParseException" wsaw:Action="urn:storeRouteEventProcessingPlatformWebserviceParseException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="EventProcessingPlatformWebserviceSoap11Binding" type="ns:EventProcessingPlatformWebservicePortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<wsdl:operation name="importEvents">
+			<soap:operation soapAction="urn:importEvents" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceXMLParsingException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceXMLParsingException"/>
+			</wsdl:fault>
+			<wsdl:fault name="EventProcessingPlatformWebserviceUnparsableException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceUnparsableException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterEventAggregationRule">
+			<soap:operation soapAction="urn:unregisterEventAggregationRule" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventType">
+			<soap:operation soapAction="urn:registerEventType" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceUnparsableException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceUnparsableException"/>
+			</wsdl:fault>
+			<wsdl:fault name="EventProcessingPlatformWebserviceDuplicatedSchemaException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceDuplicatedSchemaException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterEventType">
+			<soap:operation soapAction="urn:unregisterEventType" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterQueryFromQueue">
+			<soap:operation soapAction="urn:unregisterQueryFromQueue" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="importSemanticEventMapping">
+			<soap:operation soapAction="urn:importSemanticEventMapping" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceParsingMappingException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceParsingMappingException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventCorrelationRule">
+			<soap:operation soapAction="urn:registerEventCorrelationRule" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAttributeNames">
+			<soap:operation soapAction="urn:getAttributeNames" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceEventTypeNotFoundException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceEventTypeNotFoundException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="registerQueryForQueue">
+			<soap:operation soapAction="urn:registerQueryForQueue" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterQueriesFromQueue">
+			<soap:operation soapAction="urn:unregisterQueriesFromQueue" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="storeRouteInSemanticDB">
+			<soap:operation soapAction="urn:storeRouteInSemanticDB" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getEventTypeXSD">
+			<soap:operation soapAction="urn:getEventTypeXSD" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceEventTypeNotFoundException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceEventTypeNotFoundException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventAggregationRule">
+			<soap:operation soapAction="urn:registerEventAggregationRule" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAllEventTypes">
+			<soap:operation soapAction="urn:getAllEventTypes" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="storeRoute">
+			<soap:operation soapAction="urn:storeRoute" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceParseException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceParseException"/>
+			</wsdl:fault>
+			<wsdl:fault name="EventProcessingPlatformWebserviceJSONException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceJSONException"/>
+			</wsdl:fault>
+			<wsdl:fault name="EventProcessingPlatformWebserviceIOException">
+				<soap:fault use="literal" name="EventProcessingPlatformWebserviceIOException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="EventProcessingPlatformWebserviceSoap12Binding" type="ns:EventProcessingPlatformWebservicePortType">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<wsdl:operation name="importEvents">
+			<soap12:operation soapAction="urn:importEvents" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceXMLParsingException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceXMLParsingException"/>
+			</wsdl:fault>
+			<wsdl:fault name="EventProcessingPlatformWebserviceUnparsableException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceUnparsableException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterEventAggregationRule">
+			<soap12:operation soapAction="urn:unregisterEventAggregationRule" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventType">
+			<soap12:operation soapAction="urn:registerEventType" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceUnparsableException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceUnparsableException"/>
+			</wsdl:fault>
+			<wsdl:fault name="EventProcessingPlatformWebserviceDuplicatedSchemaException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceDuplicatedSchemaException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterEventType">
+			<soap12:operation soapAction="urn:unregisterEventType" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterQueryFromQueue">
+			<soap12:operation soapAction="urn:unregisterQueryFromQueue" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="importSemanticEventMapping">
+			<soap12:operation soapAction="urn:importSemanticEventMapping" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceParsingMappingException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceParsingMappingException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventCorrelationRule">
+			<soap12:operation soapAction="urn:registerEventCorrelationRule" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAttributeNames">
+			<soap12:operation soapAction="urn:getAttributeNames" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceEventTypeNotFoundException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceEventTypeNotFoundException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="registerQueryForQueue">
+			<soap12:operation soapAction="urn:registerQueryForQueue" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterQueriesFromQueue">
+			<soap12:operation soapAction="urn:unregisterQueriesFromQueue" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="storeRouteInSemanticDB">
+			<soap12:operation soapAction="urn:storeRouteInSemanticDB" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getEventTypeXSD">
+			<soap12:operation soapAction="urn:getEventTypeXSD" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceEventTypeNotFoundException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceEventTypeNotFoundException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventAggregationRule">
+			<soap12:operation soapAction="urn:registerEventAggregationRule" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAllEventTypes">
+			<soap12:operation soapAction="urn:getAllEventTypes" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="storeRoute">
+			<soap12:operation soapAction="urn:storeRoute" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="EventProcessingPlatformWebserviceParseException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceParseException"/>
+			</wsdl:fault>
+			<wsdl:fault name="EventProcessingPlatformWebserviceJSONException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceJSONException"/>
+			</wsdl:fault>
+			<wsdl:fault name="EventProcessingPlatformWebserviceIOException">
+				<soap12:fault use="literal" name="EventProcessingPlatformWebserviceIOException"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="EventProcessingPlatformWebserviceHttpBinding" type="ns:EventProcessingPlatformWebservicePortType">
+		<http:binding verb="POST"/>
+		<wsdl:operation name="importEvents">
+			<http:operation location="importEvents"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterEventAggregationRule">
+			<http:operation location="unregisterEventAggregationRule"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventType">
+			<http:operation location="registerEventType"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterEventType">
+			<http:operation location="unregisterEventType"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterQueryFromQueue">
+			<http:operation location="unregisterQueryFromQueue"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="importSemanticEventMapping">
+			<http:operation location="importSemanticEventMapping"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventCorrelationRule">
+			<http:operation location="registerEventCorrelationRule"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAttributeNames">
+			<http:operation location="getAttributeNames"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registerQueryForQueue">
+			<http:operation location="registerQueryForQueue"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="unregisterQueriesFromQueue">
+			<http:operation location="unregisterQueriesFromQueue"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="storeRouteInSemanticDB">
+			<http:operation location="storeRouteInSemanticDB"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getEventTypeXSD">
+			<http:operation location="getEventTypeXSD"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registerEventAggregationRule">
+			<http:operation location="registerEventAggregationRule"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAllEventTypes">
+			<http:operation location="getAllEventTypes"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="storeRoute">
+			<http:operation location="storeRoute"/>
+			<wsdl:input>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="application/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="EventProcessingPlatformWebservice">
+		<wsdl:port name="EventProcessingPlatformWebserviceHttpSoap11Endpoint" binding="ns:EventProcessingPlatformWebserviceSoap11Binding">
+			<soap:address location="http://bpt.hpi.uni-potsdam.de/GETAggregationWebService/services/EventProcessingPlatformWebservice.EventProcessingPlatformWebserviceHttpSoap11Endpoint/"/>
+		</wsdl:port>
+		<wsdl:port name="EventProcessingPlatformWebserviceHttpSoap12Endpoint" binding="ns:EventProcessingPlatformWebserviceSoap12Binding">
+			<soap12:address location="http://bpt.hpi.uni-potsdam.de/GETAggregationWebService/services/EventProcessingPlatformWebservice.EventProcessingPlatformWebserviceHttpSoap12Endpoint/"/>
+		</wsdl:port>
+		<wsdl:port name="EventProcessingPlatformWebserviceHttpEndpoint" binding="ns:EventProcessingPlatformWebserviceHttpBinding">
+			<http:address location="http://bpt.hpi.uni-potsdam.de/GETAggregationWebService/services/EventProcessingPlatformWebservice.EventProcessingPlatformWebserviceHttpEndpoint/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

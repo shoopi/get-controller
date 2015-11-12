@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="prototypeProcessModel" name="Prototype Process Model" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="doAdmin" name="Do Admin Tasks" activiti:candidateGroups="admin"></userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="doAdmin"></sequenceFlow>
+    <userTask id="reserveTruck" name="Reserve Truck" activiti:candidateGroups="admin">
+      <extensionElements>
+        <activiti:formProperty id="truckID" name="Selected Truck" type="string" variable="truckID" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow2" sourceRef="doAdmin" targetRef="reserveTruck"></sequenceFlow>
+    <userTask id="loadGoods" name="Load Goods" activiti:candidateGroups="admin,driver">
+      <extensionElements>
+        <activiti:formProperty id="ready" name="Ready To Proceed?" type="boolean" variable="ready"></activiti:formProperty>
+        <activiti:formProperty id="weight" name="Container Weight" type="long" variable="weight"></activiti:formProperty>
+        <activiti:formProperty id="path" name="Next Task?" type="enum" variable="path" required="true">
+          <activiti:value id="drive" name="Drive"></activiti:value>
+          <activiti:value id="rest" name="Rest"></activiti:value>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow3" sourceRef="reserveTruck" targetRef="loadGoods"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow4" sourceRef="loadGoods" targetRef="exclusivegateway1"></sequenceFlow>
+    <userTask id="drive" name="Drive" activiti:candidateGroups="admin,driver"></userTask>
+    <sequenceFlow id="flow5" sourceRef="exclusivegateway1" targetRef="drive">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${path=="drive"}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="rest" name="Rest" activiti:candidateGroups="admin,driver"></userTask>
+    <sequenceFlow id="flow6" sourceRef="exclusivegateway1" targetRef="rest">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${path=="rest"}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow7" sourceRef="rest" targetRef="exclusivegateway2"></sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="drive" targetRef="exclusivegateway2"></sequenceFlow>
+    <userTask id="unload" name="Unload Container" activiti:candidateGroups="admin,driver"></userTask>
+    <sequenceFlow id="flow9" sourceRef="exclusivegateway2" targetRef="unload"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow10" sourceRef="unload" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_prototypeProcessModel">
+    <bpmndi:BPMNPlane bpmnElement="prototypeProcessModel" id="BPMNPlane_prototypeProcessModel">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="100.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="doAdmin" id="BPMNShape_doAdmin">
+        <omgdc:Bounds height="55.0" width="105.0" x="180.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reserveTruck" id="BPMNShape_reserveTruck">
+        <omgdc:Bounds height="55.0" width="105.0" x="330.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="loadGoods" id="BPMNShape_loadGoods">
+        <omgdc:Bounds height="55.0" width="105.0" x="480.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="630.0" y="128.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="drive" id="BPMNShape_drive">
+        <omgdc:Bounds height="55.0" width="105.0" x="720.0" y="30.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="rest" id="BPMNShape_rest">
+        <omgdc:Bounds height="55.0" width="105.0" x="720.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="860.0" y="106.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="unload" id="BPMNShape_unload">
+        <omgdc:Bounds height="55.0" width="105.0" x="930.0" y="99.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1080.0" y="109.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="135.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="180.0" y="147.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="285.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="330.0" y="147.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="435.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="480.0" y="147.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="585.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="630.0" y="148.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="650.0" y="128.0"></omgdi:waypoint>
+        <omgdi:waypoint x="772.0" y="85.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="650.0" y="168.0"></omgdi:waypoint>
+        <omgdi:waypoint x="772.0" y="180.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="772.0" y="180.0"></omgdi:waypoint>
+        <omgdi:waypoint x="880.0" y="146.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="772.0" y="85.0"></omgdi:waypoint>
+        <omgdi:waypoint x="880.0" y="106.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="900.0" y="126.0"></omgdi:waypoint>
+        <omgdi:waypoint x="930.0" y="126.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="1035.0" y="126.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1080.0" y="126.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

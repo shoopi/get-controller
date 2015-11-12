@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This event should be thrown for incidents with the vehicle or the resource operating it, like flat tire, broken engine, tired driver; however not for observed traffic which should be published differently using the RoadTraffic event-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="VehicleIncident.xsd"
+	targetNamespace="VehicleIncident.xsd" elementFormDefault="qualified">
+	<xs:element name="VehicleIncident">
+		<xs:complexType>
+			<xs:sequence>
+				<!-- represents the identifier of the source: asset identifier-->
+				<xs:element name="operatorId" type="xs:integer"	minOccurs="1" maxOccurs="1" />
+
+				<!-- coordinates at which the incident happened -->
+				<xs:element name="latitude" type="xs:double" minOccurs="1" maxOccurs="1" />
+				<xs:element name="longitude" type="xs:double" minOccurs="1"	maxOccurs="1" />
+
+				<!-- time when the incident was observed -->
+				<xs:element name="timestamp" type="xs:dateTime" minOccurs="1" maxOccurs="1" />
+
+				<!-- the user/system can enter a longer description (human-readable) to describe the incident -->
+				<xs:element name="description" type="xs:string"/>
+
+				<!-- short name for the type of the incident, e.g. flat tire, broken engine, tired driver -->
+				<xs:element name="type" type="xs:string"/>
+				
+				<!-- reference to the task the operator is currently executing, may be empty -->
+				<xs:element name="taskId" type="xs:integer"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

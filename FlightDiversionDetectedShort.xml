@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flightTrace xmlns="FlightDiversionDetectedShort.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FlightDiversionDetectedShort.xsd ">
+  <flightId>24980875</flightId>
+  <timestamp>2001-12-31T12:00:00</timestamp>
+  <aircraftId>24980875</aircraftId>
+  <latitude>45.6602</latitude>
+  <longitude>6.5425</longitude>
+</flightTrace>

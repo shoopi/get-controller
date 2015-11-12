@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <collaboration id="Collaboration">
+    <participant id="process_pool_1_new" name="Old Process" processRef="process_pool1"></participant>
+  </collaboration>
+  <process id="process_pool1" name="Logistics Process" isExecutable="true">
+    <laneSet id="laneSet_process_pool1">
+      <lane id="lane1" name="Consignment">
+        <flowNodeRef>usertask102</flowNodeRef>
+        <flowNodeRef>usertask103</flowNodeRef>
+        <flowNodeRef>usertask104</flowNodeRef>
+        <flowNodeRef>usertask105</flowNodeRef>
+        <flowNodeRef>usertask101_3753294</flowNodeRef>
+        <flowNodeRef>usertask102_3753294</flowNodeRef>
+        <flowNodeRef>endevent101_3753294</flowNodeRef>
+        <flowNodeRef>parallelgateway101_3753294</flowNodeRef>
+      </lane>
+      <lane id="lane2" name="Planner">
+        <flowNodeRef>usertask101</flowNodeRef>
+        <flowNodeRef>usertask10108</flowNodeRef>
+        <flowNodeRef>usertask103_6558520</flowNodeRef>
+        <flowNodeRef>endevent101</flowNodeRef>
+        <flowNodeRef>startevent101</flowNodeRef>
+        <flowNodeRef>parallelgateway1020</flowNodeRef>
+        <flowNodeRef>parallelgateway2</flowNodeRef>
+      </lane>
+    </laneSet>
+    <userTask id="usertask102" name="Pick empty container" activiti:candidateGroups="admin,driver">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Current Position&lt;/source&gt;
+		&lt;destination&gt;Current Position&lt;/destination&gt;
+		&lt;isRollbackable&gt;0&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;0&lt;/isConfirmationTask&gt;		
+        	&lt;compensatoryTask&gt;&lt;/compensatoryTask&gt;
+		&lt;confirmationTask&gt;&lt;/confirmationTask&gt;
+	&lt;/replanningAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+      <extensionElements>
+        <activiti:formProperty id="containerType" name="Container Type" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="volume" name="Volume" type="long"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask103" name="Drive to Warehouse" activiti:candidateGroups="admin,driver">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Current Position&lt;/source&gt;
+		&lt;destination&gt;Venlo&lt;/destination&gt;
+		&lt;isRollbackable&gt;0&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;0&lt;/isConfirmationTask&gt;
+		&lt;compensatoryTask&gt;&lt;/compensatoryTask&gt;
+		&lt;confirmationTask&gt;&lt;/confirmationTask&gt;
+	&lt;/replanningAnnotation&gt;
+	&lt;queryAnnotation&gt;
+		&lt;query&gt; 
+			&lt;queryText&gt;
+				Select  operatorId, timestamp, mode, distance, duration, startTime, speed, currentLatitude, currentLongitude,  previousLatitude, previousLongitude from PositionUpdate(operatorId=$truckId)
+			&lt;/queryText&gt;
+			&lt;eventType&gt;PositionUpdate &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask103&lt;/startTask&gt;
+				&lt;endTask&gt;usertask103&lt;/endTask&gt;
+				&lt;roles&gt;admin&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;
+				Select  latitude, longitude, nodeId, mode,  nodeName, operatorId, timestamp from ArrivedAtTransportNode(operatorId=$truckId)
+			&lt;/queryText&gt;
+			&lt;eventType&gt;ArrivedAtTransportNode &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask103&lt;/startTask&gt;
+				&lt;endTask&gt;usertask103&lt;/endTask&gt;
+				&lt;roles&gt;admin&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;
+				Select operatorId, latitude,mode,  longitude, distanceRemaining, distanceCovered, timeElapsed, timeRemaining, timestamp from TransportProgress(operatorId=$truckId) 
+			&lt;/queryText&gt;
+			&lt;eventType&gt; TransportProgress &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask103&lt;/startTask&gt;
+				&lt;endTask&gt;usertask103&lt;/endTask&gt;
+				&lt;roles&gt;admin,driver&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;
+				Select latitude, longitude, mode, nodeId, nodeName, operatorId, timestamp From StartedFromTransportNode(operatorId=$truckId)
+			&lt;/queryText&gt;
+			&lt;eventType&gt; StartedFromTransportNode &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask103&lt;/startTask&gt;
+				&lt;endTask&gt;usertask103&lt;/endTask&gt;
+				&lt;roles&gt;admin&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;		  
+		&lt;query&gt;
+			&lt;queryText&gt;
+				SELECT predictedLength, predictedDelay, longitude, latitude, route, caseId FROM CongestionOnRoute WHERE caseId = $caseId
+			&lt;/queryText&gt;
+			&lt;eventType&gt; CongestionOnRoute &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask103&lt;/startTask&gt;
+				&lt;endTask&gt;usertask103&lt;/endTask&gt;
+				&lt;roles&gt;admin,driver&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;		  
+	&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow6" sourceRef="usertask102" targetRef="usertask103"></sequenceFlow>
+    <userTask id="usertask104" name="Load goods" activiti:candidateGroups="admin,driver">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Venlo&lt;/source&gt;
+		&lt;destination&gt;Venlo&lt;/destination&gt;
+		&lt;isRollbackable&gt;0&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;0&lt;/isConfirmationTask&gt;
+		&lt;compensatoryTask&gt;&lt;/compensatoryTask&gt;
+		&lt;confirmationTask&gt;&lt;/confirmationTask&gt;
+	&lt;/replanningAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+      <extensionElements>
+        <activiti:formProperty id="loaded" name="Loaded" type="boolean" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow7" sourceRef="usertask103" targetRef="usertask104"></sequenceFlow>
+    <userTask id="usertask105" name="Transport by truck" activiti:candidateGroups="admin,driver">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Venlo&lt;/source&gt;
+		&lt;destination&gt;Rotterdam ECT DELTA&lt;/destination&gt;
+		&lt;isRollbackable&gt;0&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;0&lt;/isConfirmationTask&gt;
+		&lt;compensatoryTask/&gt;
+		&lt;confirmationTask/&gt;
+	&lt;/replanningAnnotation&gt;
+	&lt;queryAnnotation&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;Select  operatorId, timestamp, mode, distance, duration, startTime, speed, currentLatitude, currentLongitude,  previousLatitude, previousLongitude from PositionUpdate(operatorId=$truckId)&lt;/queryText&gt;
+			&lt;eventType&gt;PositionUpdate &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask105&lt;/startTask&gt;
+				&lt;endTask&gt;usertask105&lt;/endTask&gt;
+				&lt;roles&gt;admin&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;
+				Select  latitude, longitude, nodeId, mode,  nodeName, operatorId, timestamp from ArrivedAtTransportNode(operatorId=$truckId)
+			&lt;/queryText&gt;
+			&lt;eventType&gt;ArrivedAtTransportNode &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask105&lt;/startTask&gt;
+				&lt;endTask&gt;usertask105&lt;/endTask&gt;
+				&lt;roles&gt;admin&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;
+				Select operatorId, latitude,mode,  longitude, distanceRemaining, distanceCovered, timeElapsed, timeRemaining, timestamp from TransportProgress(operatorId=$truckId)
+			&lt;/queryText&gt;
+			&lt;eventType&gt; TransportProgress &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask105&lt;/startTask&gt;
+				&lt;endTask&gt;usertask105&lt;/endTask&gt;
+				&lt;roles&gt;admin,driver&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;
+		&lt;query&gt;
+			&lt;queryText&gt;
+				Select latitude, longitude, mode, nodeId, nodeName, operatorId, timestamp From StartedFromTransportNode(operatorId=$truckId)
+			&lt;/queryText&gt;
+			&lt;eventType&gt; StartedFromTransportNode &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask105&lt;/startTask&gt;
+				&lt;endTask&gt;usertask105&lt;/endTask&gt;
+				&lt;roles&gt;admin&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;		  
+		&lt;query&gt;
+			&lt;queryText&gt;
+				SELECT predictedLength, predictedDelay, longitude, latitude, route, caseId FROM CongestionOnRoute WHERE caseId = $caseId
+			&lt;/queryText&gt;
+			&lt;eventType&gt; CongestionOnRoute &lt;/eventType&gt;
+			&lt;scope trigger="false"&gt;
+				&lt;startTask&gt;usertask105&lt;/startTask&gt;
+				&lt;endTask&gt;usertask105&lt;/endTask&gt;
+				&lt;roles&gt;admin,driver&lt;/roles&gt;
+			&lt;/scope&gt;
+		&lt;/query&gt;		  
+	&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow8" sourceRef="usertask104" targetRef="usertask105"></sequenceFlow>
+    <userTask id="usertask101_3753294" name="Unload" activiti:candidateGroups="admin,driver">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Rotterdam ECT DELTA&lt;/source&gt;
+		&lt;destination&gt;Rotterdam ECT DELTA&lt;/destination&gt;
+		&lt;isRollbackable&gt;0&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;0&lt;/isConfirmationTask&gt;
+		&lt;compensatoryTask&gt;&lt;/compensatoryTask&gt;
+		&lt;confirmationTask&gt;&lt;/confirmationTask&gt;
+	&lt;/replanningAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+      <extensionElements>
+        <activiti:formProperty id="unloaded" name="Unloaded" type="boolean" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask102_3753294" name="Send documents" activiti:candidateGroups="admin,driver">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Venlo&lt;/source&gt;
+		&lt;destination&gt;Rotterdam ECT DELTA&lt;/destination&gt;
+		&lt;isRollbackable&gt;1&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;0&lt;/isConfirmationTask&gt;
+		&lt;compensatoryTask&gt;usertask12&lt;/compensatoryTask&gt;
+		&lt;confirmationTask&gt;usertask3_3753294&lt;/confirmationTask&gt;
+	&lt;/replanningAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow2_3753294" sourceRef="usertask101_3753294" targetRef="usertask102_3753294"></sequenceFlow>
+    <sequenceFlow id="flow3_3753294" sourceRef="usertask102_3753294" targetRef="parallelgateway101_3753294"></sequenceFlow>
+    <endEvent id="endevent101_3753294" name="End"></endEvent>
+    <startEvent id="startevent101" name="Start">
+      <extensionElements>
+        <activiti:formProperty id="truckId" name="truckId" type="string"></activiti:formProperty>
+      </extensionElements>
+    </startEvent>
+    <userTask id="usertask101" name="Reserve truck" activiti:candidateGroups="admin">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Venlo&lt;/source&gt;
+		&lt;destination&gt;Eindhoven Station&lt;/destination&gt;
+		&lt;isRollbackable&gt;1&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;0&lt;/isConfirmationTask&gt;
+		&lt;compensatoryTask&gt;usertask6&lt;/compensatoryTask&gt;
+		&lt;confirmationTask&gt;usertask8&lt;/confirmationTask&gt;
+	&lt;/replanningAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <parallelGateway id="parallelgateway1" name="Parallel Gateway"></parallelGateway>
+    <parallelGateway id="parallelgateway1020" name="Parallel Gateway"></parallelGateway>
+    <userTask id="usertask103_6558520" name="Receive documents" activiti:candidateGroups="admin">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Venlo&lt;/source&gt;
+		&lt;destination&gt;Rotterdam ECT DELTA&lt;/destination&gt;
+		&lt;isRollbackable&gt;1&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;1&lt;/isConfirmationTask&gt;
+		&lt;compensatoryTask&gt;&lt;/compensatoryTask&gt;
+		&lt;confirmationTask&gt;&lt;/confirmationTask&gt;
+	&lt;/replanningAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow7_6558520" sourceRef="parallelgateway1020" targetRef="usertask103_6558520"></sequenceFlow>
+    <userTask id="usertask10108" name="Confirm truck" activiti:candidateGroups="admin">
+      <documentation>&lt;taskDocumentation&gt;
+	&lt;replanningAnnotation&gt;
+		&lt;source&gt;Venlo&lt;/source&gt;
+		&lt;destination&gt;Venlo&lt;/destination&gt;
+		&lt;isRollbackable&gt;1&lt;/isRollbackable&gt;
+		&lt;isConfirmationTask&gt;1&lt;/isConfirmationTask&gt;
+		&lt;compensatoryTask&gt;usertask6&lt;/compensatoryTask&gt;
+		&lt;confirmationTask&gt;&lt;/confirmationTask&gt;
+	&lt;/replanningAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow897698" sourceRef="usertask10108" targetRef="parallelgateway1020"></sequenceFlow>
+    <endEvent id="endevent101" name="End"></endEvent>
+    <sequenceFlow id="flow897701" sourceRef="usertask103_6558520" targetRef="endevent101"></sequenceFlow>
+    <sequenceFlow id="flow897709" sourceRef="startevent101" targetRef="usertask101"></sequenceFlow>
+    <sequenceFlow id="flow897711" sourceRef="usertask105" targetRef="usertask101_3753294"></sequenceFlow>
+    <parallelGateway id="parallelgateway101_3753294" name="Parallel Gateway"></parallelGateway>
+    <sequenceFlow id="flow4_3753294" sourceRef="parallelgateway101_3753294" targetRef="endevent101_3753294"></sequenceFlow>
+    <sequenceFlow id="flow897710" sourceRef="parallelgateway101_3753294" targetRef="parallelgateway1020"></sequenceFlow>
+    <sequenceFlow id="flow897712" sourceRef="usertask101" targetRef="parallelgateway1"></sequenceFlow>
+    <sequenceFlow id="flow897713" sourceRef="parallelgateway1" targetRef="usertask102"></sequenceFlow>
+    <sequenceFlow id="flow897714" sourceRef="usertask102" targetRef="parallelgateway2"></sequenceFlow>
+    <sequenceFlow id="flow897715" sourceRef="parallelgateway1" targetRef="parallelgateway2"></sequenceFlow>
+    <parallelGateway id="parallelgateway2" name="Parallel Gateway"></parallelGateway>
+    <sequenceFlow id="flow897716" sourceRef="parallelgateway2" targetRef="usertask10108"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
+      <bpmndi:BPMNShape bpmnElement="process_pool_1_new" id="BPMNShape_process_pool_1_new">
+        <omgdc:Bounds height="550.0" width="1354.0" x="277.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="lane1" id="BPMNShape_lane1">
+        <omgdc:Bounds height="170.0" width="1324.0" x="297.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="lane2" id="BPMNShape_lane2">
+        <omgdc:Bounds height="250.0" width="1315.0" x="307.0" y="410.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask102" id="BPMNShape_usertask102">
+        <omgdc:Bounds height="55.0" width="105.0" x="507.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask103" id="BPMNShape_usertask103">
+        <omgdc:Bounds height="55.0" width="105.0" x="647.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask104" id="BPMNShape_usertask104">
+        <omgdc:Bounds height="55.0" width="105.0" x="797.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask105" id="BPMNShape_usertask105">
+        <omgdc:Bounds height="55.0" width="105.0" x="947.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask101_3753294" id="BPMNShape_usertask101_3753294">
+        <omgdc:Bounds height="55.0" width="105.0" x="1100.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask102_3753294" id="BPMNShape_usertask102_3753294">
+        <omgdc:Bounds height="55.0" width="105.0" x="1250.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent101_3753294" id="BPMNShape_endevent101_3753294">
+        <omgdc:Bounds height="35.0" width="35.0" x="1490.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent101" id="BPMNShape_startevent101">
+        <omgdc:Bounds height="35.0" width="35.0" x="330.0" y="614.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask101" id="BPMNShape_usertask101">
+        <omgdc:Bounds height="55.0" width="105.0" x="397.0" y="474.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway1" id="BPMNShape_parallelgateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="540.0" y="481.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway1020" id="BPMNShape_parallelgateway1020">
+        <omgdc:Bounds height="40.0" width="40.0" x="1390.0" y="481.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask103_6558520" id="BPMNShape_usertask103_6558520">
+        <omgdc:Bounds height="55.0" width="105.0" x="1457.0" y="474.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask10108" id="BPMNShape_usertask10108">
+        <omgdc:Bounds height="55.0" width="105.0" x="810.0" y="474.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent101" id="BPMNShape_endevent101">
+        <omgdc:Bounds height="35.0" width="35.0" x="1580.0" y="484.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway101_3753294" id="BPMNShape_parallelgateway101_3753294">
+        <omgdc:Bounds height="40.0" width="40.0" x="1390.0" y="307.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway2" id="BPMNShape_parallelgateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="680.0" y="481.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="612.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="647.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="752.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="797.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="902.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="947.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2_3753294" id="BPMNEdge_flow2_3753294">
+        <omgdi:waypoint x="1205.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1250.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3_3753294" id="BPMNEdge_flow3_3753294">
+        <omgdi:waypoint x="1355.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1390.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7_6558520" id="BPMNEdge_flow7_6558520">
+        <omgdi:waypoint x="1430.0" y="501.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1457.0" y="501.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897698" id="BPMNEdge_flow897698">
+        <omgdi:waypoint x="915.0" y="501.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1390.0" y="501.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897701" id="BPMNEdge_flow897701">
+        <omgdi:waypoint x="1562.0" y="501.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1580.0" y="501.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897709" id="BPMNEdge_flow897709">
+        <omgdi:waypoint x="365.0" y="631.0"></omgdi:waypoint>
+        <omgdi:waypoint x="449.0" y="631.0"></omgdi:waypoint>
+        <omgdi:waypoint x="449.0" y="529.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897711" id="BPMNEdge_flow897711">
+        <omgdi:waypoint x="1052.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1100.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4_3753294" id="BPMNEdge_flow4_3753294">
+        <omgdi:waypoint x="1430.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1490.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897710" id="BPMNEdge_flow897710">
+        <omgdi:waypoint x="1410.0" y="347.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1410.0" y="481.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897712" id="BPMNEdge_flow897712">
+        <omgdi:waypoint x="502.0" y="501.0"></omgdi:waypoint>
+        <omgdi:waypoint x="540.0" y="501.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897713" id="BPMNEdge_flow897713">
+        <omgdi:waypoint x="560.0" y="481.0"></omgdi:waypoint>
+        <omgdi:waypoint x="559.0" y="355.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897714" id="BPMNEdge_flow897714">
+        <omgdi:waypoint x="559.0" y="355.0"></omgdi:waypoint>
+        <omgdi:waypoint x="700.0" y="431.0"></omgdi:waypoint>
+        <omgdi:waypoint x="700.0" y="481.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897715" id="BPMNEdge_flow897715">
+        <omgdi:waypoint x="580.0" y="501.0"></omgdi:waypoint>
+        <omgdi:waypoint x="680.0" y="501.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow897716" id="BPMNEdge_flow897716">
+        <omgdi:waypoint x="720.0" y="501.0"></omgdi:waypoint>
+        <omgdi:waypoint x="810.0" y="501.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

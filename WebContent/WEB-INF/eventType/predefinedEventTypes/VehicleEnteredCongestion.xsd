@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="CongestionOnRoute.xsd"
+	targetNamespace="CongestionOnRoute.xsd" elementFormDefault="qualified">
+	<xs:element name="CongestionOnRouteEvent">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="latitude" type="xs:double" />
+				<xs:element name="longitude" type="xs:double" />
+				<xs:element name="source" type="xs:string" />
+				<xs:element name="operatorId" type="xs:integer"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="timestamp" type="xs:date" />
+				<!-- meters -->
+				<xs:element name="predictedLength" type="xs:long" />
+				<!-- milliseconds -->
+				<xs:element name="predictedDelay" type="xs:long" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

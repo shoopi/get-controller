@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="LockClosed.xsd"
+	targetNamespace="LockClosed.xsd" elementFormDefault="qualified">
+	<xs:element name="LockClosed">
+		<xs:complexType>
+			<xs:sequence>
+			    <!-- delay in milliseconds -->
+				<xs:element name="delay" type="xs:long"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="startTime" type="xs:dateTime"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="endTime" type="xs:dateTime"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="latitude" type="xs:double" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="longitude" type="xs:double" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="timestamp" type="xs:dateTime" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="source" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

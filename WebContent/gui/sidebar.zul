@@ -1,0 +1,23 @@
+<div apply="main.java.nl.tue.ieis.get.control.SidebarController" hflex="1" vflex="1">
+<borderlayout hflex="1" vflex="1">
+	<center autoscroll="true">
+		<grid vflex="2" sclass="sidebar" id="caseListSidebar">
+			<columns>
+				<column width="36px"/>
+				<column/>
+			</columns>
+			<rows/>
+		</grid>
+	</center>
+	<south collapsible="true" splittable="true" autoscroll="true" height="36%;" title="Message Center">
+		<grid id="msgGrid" vflex="1" sclass="sidebar" emptyMessage="No Message Found" >
+			<columns>
+				<column width="36px"/>
+				<column/>
+			</columns>
+			<rows />
+		</grid>
+	</south>
+</borderlayout>
+<timer id="sidebarTimer" delay="2000" onClientInfo="self.start()" repeats="true"/>
+</div>

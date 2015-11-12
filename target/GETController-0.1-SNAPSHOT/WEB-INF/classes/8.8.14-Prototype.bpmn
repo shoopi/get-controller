@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <collaboration id="Collaboration">
+    <participant id="prototypeV0" name="prototypeV0" processRef="prototype"></participant>
+  </collaboration>
+  <process id="prototype" name="prototype" isExecutable="true">
+    <laneSet id="laneSet_prototype">
+      <lane id="Consignment" name="Consignment">
+        <flowNodeRef>usertask2</flowNodeRef>
+        <flowNodeRef>usertask4</flowNodeRef>
+        <flowNodeRef>usertask5</flowNodeRef>
+        <flowNodeRef>usertask7</flowNodeRef>
+        <flowNodeRef>usertask8</flowNodeRef>
+        <flowNodeRef>usertask10</flowNodeRef>
+        <flowNodeRef>parallelgateway4</flowNodeRef>
+        <flowNodeRef>usertask12</flowNodeRef>
+        <flowNodeRef>usertask13</flowNodeRef>
+        <flowNodeRef>usertask14</flowNodeRef>
+        <flowNodeRef>usertask16</flowNodeRef>
+        <flowNodeRef>endevent3</flowNodeRef>
+      </lane>
+      <lane id="Planner" name="Planner">
+        <flowNodeRef>startevent1</flowNodeRef>
+        <flowNodeRef>usertask1</flowNodeRef>
+        <flowNodeRef>parallelgateway1</flowNodeRef>
+        <flowNodeRef>parallelgateway3</flowNodeRef>
+        <flowNodeRef>usertask9</flowNodeRef>
+        <flowNodeRef>usertask11</flowNodeRef>
+        <flowNodeRef>endevent1</flowNodeRef>
+        <flowNodeRef>parallelgateway5</flowNodeRef>
+        <flowNodeRef>usertask15</flowNodeRef>
+        <flowNodeRef>endevent2</flowNodeRef>
+        <flowNodeRef>usertask17</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="startevent1" name="Start">
+      <extensionElements>
+        <activiti:formProperty id="truckId" name="truckId" type="string"></activiti:formProperty>
+      </extensionElements>
+    </startEvent>
+    <userTask id="usertask1" name="Transport planned notification"></userTask>
+    <sequenceFlow id="flow2" sourceRef="usertask1" targetRef="usertask2"></sequenceFlow>
+    <userTask id="usertask2" name="Transport planned notification received"></userTask>
+    <parallelGateway id="parallelgateway1" name="Parallel Gateway"></parallelGateway>
+    <sequenceFlow id="flow3" sourceRef="usertask1" targetRef="parallelgateway1"></sequenceFlow>
+    <userTask id="usertask4" name="Drive (pick empty container)">
+      <documentation>&lt;taskDocumentation&gt;
+&lt;queryAnnotation&gt; 
+ &lt;query&gt; 
+    &lt;queryText&gt;Select  operatorId, timestamp, distance, duration, startTime, speed, currentLatitude, currentLongitude,  previousLatitude, previousLongitude from PositionUpdate(operatorId=$truckId)&lt;/queryText&gt; 
+    &lt;eventType&gt;PositionUpdate &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask4&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask4&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;query&gt; 
+    &lt;queryText&gt;Select  latitude, longitude, nodeId, nodeName, operatorId, timestamp from ArrivedAtTransportNode(operatorId=$truckId)&lt;/queryText&gt; 
+ &lt;eventType&gt;ArrivedAtTransportNode &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask4&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask4&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;query&gt; 
+    &lt;queryText&gt;  Select operatorId, latitude, longitude, distanceRemaining, distanceCovered, timeElapsed, timeRemaining, timestamp from TransportProgress(operatorId=$truckId) &lt;/queryText&gt; 
+ &lt;eventType&gt; TransportProgress &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask4&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask4&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;query&gt; 
+    &lt;queryText&gt;Select latitude, longitude, nodeId, nodeName, operatorId, timestamp From StartedFromTransportNode(operatorId=$truckId)&lt;/queryText&gt; 
+ &lt;eventType&gt; StartedFromTransportNode &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask4&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask4&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <userTask id="usertask5" name="Load goods"></userTask>
+    <sequenceFlow id="flow8" sourceRef="usertask4" targetRef="usertask5"></sequenceFlow>
+    <userTask id="usertask7" name="Drive">
+      <documentation>&lt;taskDocumentation&gt;
+&lt;queryAnnotation&gt; 
+ &lt;query&gt; 
+    &lt;queryText&gt;Select  operatorId, timestamp, distance, duration, startTime, speed, currentLatitude, currentLongitude,  previousLatitude, previousLongitude from PositionUpdate(operatorId=$truckId)&lt;/queryText&gt; 
+    &lt;eventType&gt;PositionUpdate &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;query&gt; 
+    &lt;queryText&gt;Select  latitude, longitude, nodeId, nodeName, operatorId, timestamp from ArrivedAtTransportNode(operatorId=$truckId)&lt;/queryText&gt; 
+ &lt;eventType&gt;ArrivedAtTransportNode &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;query&gt; 
+    &lt;queryText&gt;  Select operatorId, latitude, longitude, distanceRemaining, distanceCovered, timeElapsed, timeRemaining, timestamp from TransportProgress(operatorId=$truckId) &lt;/queryText&gt; 
+ &lt;eventType&gt; TransportProgress &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;query&gt; 
+    &lt;queryText&gt;Select latitude, longitude, nodeId, nodeName, operatorId, timestamp From StartedFromTransportNode(operatorId=$truckId)&lt;/queryText&gt; 
+ &lt;eventType&gt; StartedFromTransportNode &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;query&gt; 
+    &lt;queryText&gt;select source, timestamp, route, predictedDelay, predictedLength, latitude, longitude, caseId from CongestionOnRoute&lt;/queryText&gt; 
+    &lt;eventType&gt;CongestionOnRoute &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask7&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask7&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow10" sourceRef="usertask5" targetRef="usertask7"></sequenceFlow>
+    <userTask id="usertask8" name="Send documents"></userTask>
+    <sequenceFlow id="flow11" sourceRef="usertask7" targetRef="usertask8"></sequenceFlow>
+    <sequenceFlow id="flow13" sourceRef="usertask8" targetRef="parallelgateway3"></sequenceFlow>
+    <parallelGateway id="parallelgateway3" name="Exclusive Gateway"></parallelGateway>
+    <userTask id="usertask9" name="Receive documents"></userTask>
+    <sequenceFlow id="flow15" sourceRef="parallelgateway3" targetRef="usertask9"></sequenceFlow>
+    <userTask id="usertask10" name="Transship goods on the train"></userTask>
+    <sequenceFlow id="flow16" sourceRef="usertask8" targetRef="usertask10"></sequenceFlow>
+    <userTask id="usertask11" name="Reserve Train"></userTask>
+    <sequenceFlow id="flow17" sourceRef="parallelgateway1" targetRef="usertask11"></sequenceFlow>
+    <sequenceFlow id="flow18" sourceRef="usertask11" targetRef="parallelgateway4"></sequenceFlow>
+    <sequenceFlow id="flow19" sourceRef="usertask10" targetRef="parallelgateway4"></sequenceFlow>
+    <parallelGateway id="parallelgateway4" name="Exclusive Gateway"></parallelGateway>
+    <userTask id="usertask12" name="Transport by train">
+      <documentation>&lt;taskDocumentation&gt;
+&lt;queryAnnotation&gt; 
+ &lt;query&gt; 
+    &lt;queryText&gt;Select  operatorId, timestamp, distance, duration, startTime, speed, currentLatitude, currentLongitude,  previousLatitude, previousLongitude from PositionUpdate(operatorId=$truckId)&lt;/queryText&gt; 
+    &lt;eventType&gt;PositionUpdate &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask12&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask12&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;query&gt; 
+    &lt;queryText&gt;Select  latitude, longitude, nodeId, nodeName, operatorId, timestamp from ArrivedAtTransportNode(operatorId=$truckId)&lt;/queryText&gt; 
+ &lt;eventType&gt;ArrivedAtTransportNode &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask12&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask12&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;query&gt; 
+    &lt;queryText&gt;  Select operatorId, latitude, longitude, distanceRemaining, distanceCovered, timeElapsed, timeRemaining, timestamp from TransportProgress(operatorId=$truckId) &lt;/queryText&gt; 
+ &lt;eventType&gt; TransportProgress &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask12&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask12&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;  
+&lt;query&gt; 
+    &lt;queryText&gt;Select latitude, longitude, nodeId, nodeName, operatorId, timestamp From StartedFromTransportNode(operatorId=$truckId)&lt;/queryText&gt; 
+ &lt;eventType&gt; StartedFromTransportNode &lt;/eventType&gt;
+   &lt;scope trigger="false"&gt; 
+      &lt;startTask&gt;usertask12&lt;/startTask&gt; 
+      &lt;endTask&gt;usertask12&lt;/endTask&gt; 
+     &lt;/scope&gt; 
+  &lt;/query&gt;
+&lt;/queryAnnotation&gt;
+&lt;/taskDocumentation&gt;</documentation>
+    </userTask>
+    <sequenceFlow id="flow20" sourceRef="parallelgateway4" targetRef="usertask12"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow21" sourceRef="usertask9" targetRef="endevent1"></sequenceFlow>
+    <userTask id="usertask13" name="Unload goods"></userTask>
+    <sequenceFlow id="flow22" sourceRef="usertask12" targetRef="usertask13"></sequenceFlow>
+    <userTask id="usertask14" name="Send documents"></userTask>
+    <sequenceFlow id="flow23" sourceRef="usertask13" targetRef="usertask14"></sequenceFlow>
+    <sequenceFlow id="flow24" sourceRef="usertask11" targetRef="parallelgateway5"></sequenceFlow>
+    <parallelGateway id="parallelgateway5" name="Exclusive Gateway"></parallelGateway>
+    <sequenceFlow id="flow25" sourceRef="usertask14" targetRef="parallelgateway5"></sequenceFlow>
+    <userTask id="usertask15" name="Receive documents"></userTask>
+    <sequenceFlow id="flow26" sourceRef="parallelgateway5" targetRef="usertask15"></sequenceFlow>
+    <endEvent id="endevent2" name="End"></endEvent>
+    <sequenceFlow id="flow27" sourceRef="usertask15" targetRef="endevent2"></sequenceFlow>
+    <userTask id="usertask16" name="Export goods"></userTask>
+    <sequenceFlow id="flow28" sourceRef="usertask14" targetRef="usertask16"></sequenceFlow>
+    <endEvent id="endevent3" name="End"></endEvent>
+    <sequenceFlow id="flow29" sourceRef="usertask16" targetRef="endevent3"></sequenceFlow>
+    <sequenceFlow id="flow31" sourceRef="parallelgateway1" targetRef="parallelgateway3"></sequenceFlow>
+    <sequenceFlow id="flow33" sourceRef="usertask2" targetRef="usertask4"></sequenceFlow>
+    <userTask id="usertask17" name="Select asset"></userTask>
+    <sequenceFlow id="flow34" sourceRef="startevent1" targetRef="usertask17"></sequenceFlow>
+    <sequenceFlow id="flow35" sourceRef="usertask17" targetRef="usertask1"></sequenceFlow>
+    <textAnnotation id="textannotation1">
+      <text>deadline=2014-08-19T20:12
+startingTime=2014-08-19T18:00
+watchdogTolerance=5
+locationStart="Nijmegen"
+locationEnd="Venlo"</text>
+    </textAnnotation>
+    <textAnnotation id="textannotation2">
+      <text>deadline=2014-08-20T11:00
+startingTime=2014-08-20T09:00
+watchdogTolerance=20
+locationStart="Venlo"
+locationEnd="Eindhoven"</text>
+    </textAnnotation>
+    <textAnnotation id="textannotation3">
+      <text>deadline=2014-08-20T14:00
+startingTime=2014-08-20T12:00
+watchdogTolerance=10
+locationStart="Eindhoven"
+locationEnd="Rotterdam"</text>
+    </textAnnotation>
+    <association id="association1" sourceRef="textannotation1" targetRef="usertask4"></association>
+    <association id="association2" sourceRef="textannotation2" targetRef="usertask7"></association>
+    <association id="association3" sourceRef="textannotation3" targetRef="usertask12"></association>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
+      <bpmndi:BPMNShape bpmnElement="prototypeV0" id="BPMNShape_prototypeV0">
+        <omgdc:Bounds height="702.0" width="2121.0" x="80.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Consignment" id="BPMNShape_Consignment">
+        <omgdc:Bounds height="351.0" width="2101.0" x="100.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Planner" id="BPMNShape_Planner">
+        <omgdc:Bounds height="351.0" width="2101.0" x="100.0" y="401.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="140.0" y="561.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="370.0" y="551.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="370.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway1" id="BPMNShape_parallelgateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="680.0" y="558.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask4" id="BPMNShape_usertask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="640.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask5" id="BPMNShape_usertask5">
+        <omgdc:Bounds height="55.0" width="105.0" x="800.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask7" id="BPMNShape_usertask7">
+        <omgdc:Bounds height="55.0" width="105.0" x="950.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask8" id="BPMNShape_usertask8">
+        <omgdc:Bounds height="55.0" width="105.0" x="1100.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway3" id="BPMNShape_parallelgateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="1140.0" y="558.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask9" id="BPMNShape_usertask9">
+        <omgdc:Bounds height="55.0" width="105.0" x="1235.0" y="544.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask10" id="BPMNShape_usertask10">
+        <omgdc:Bounds height="55.0" width="105.0" x="1250.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask11" id="BPMNShape_usertask11">
+        <omgdc:Bounds height="55.0" width="105.0" x="1390.0" y="660.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway4" id="BPMNShape_parallelgateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="1420.0" y="217.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask12" id="BPMNShape_usertask12">
+        <omgdc:Bounds height="55.0" width="105.0" x="1505.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1385.0" y="554.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask13" id="BPMNShape_usertask13">
+        <omgdc:Bounds height="55.0" width="105.0" x="1655.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask14" id="BPMNShape_usertask14">
+        <omgdc:Bounds height="55.0" width="105.0" x="1805.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway5" id="BPMNShape_parallelgateway5">
+        <omgdc:Bounds height="40.0" width="40.0" x="1840.0" y="667.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask15" id="BPMNShape_usertask15">
+        <omgdc:Bounds height="55.0" width="105.0" x="1920.0" y="660.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="2060.0" y="670.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask16" id="BPMNShape_usertask16">
+        <omgdc:Bounds height="55.0" width="105.0" x="1955.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent3" id="BPMNShape_endevent3">
+        <omgdc:Bounds height="35.0" width="35.0" x="2105.0" y="220.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask17" id="BPMNShape_usertask17">
+        <omgdc:Bounds height="55.0" width="105.0" x="220.0" y="551.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="textannotation1" id="BPMNShape_textannotation1">
+        <omgdc:Bounds height="50.0" width="100.0" x="650.0" y="70.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="textannotation2" id="BPMNShape_textannotation2">
+        <omgdc:Bounds height="50.0" width="100.0" x="970.0" y="80.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="textannotation3" id="BPMNShape_textannotation3">
+        <omgdc:Bounds height="50.0" width="100.0" x="1508.0" y="80.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="422.0" y="551.0"></omgdi:waypoint>
+        <omgdi:waypoint x="422.0" y="265.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="475.0" y="578.0"></omgdi:waypoint>
+        <omgdi:waypoint x="680.0" y="578.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="745.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="800.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="905.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="950.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="1055.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1100.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="1152.0" y="265.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1160.0" y="558.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="1180.0" y="578.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1235.0" y="571.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow16" id="BPMNEdge_flow16">
+        <omgdi:waypoint x="1205.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1250.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="700.0" y="598.0"></omgdi:waypoint>
+        <omgdi:waypoint x="699.0" y="687.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1390.0" y="687.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="1442.0" y="660.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1440.0" y="257.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="1355.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1420.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="1460.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1505.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow21" id="BPMNEdge_flow21">
+        <omgdi:waypoint x="1340.0" y="571.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1385.0" y="571.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow22" id="BPMNEdge_flow22">
+        <omgdi:waypoint x="1610.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1655.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow23" id="BPMNEdge_flow23">
+        <omgdi:waypoint x="1760.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1805.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow24" id="BPMNEdge_flow24">
+        <omgdi:waypoint x="1495.0" y="687.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1840.0" y="687.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="1857.0" y="265.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1860.0" y="667.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="1880.0" y="687.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1920.0" y="687.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
+        <omgdi:waypoint x="2025.0" y="687.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2060.0" y="687.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
+        <omgdi:waypoint x="1910.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1955.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow29" id="BPMNEdge_flow29">
+        <omgdi:waypoint x="2060.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2105.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow31" id="BPMNEdge_flow31">
+        <omgdi:waypoint x="720.0" y="578.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1140.0" y="578.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow33" id="BPMNEdge_flow33">
+        <omgdi:waypoint x="475.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="640.0" y="237.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow34" id="BPMNEdge_flow34">
+        <omgdi:waypoint x="175.0" y="578.0"></omgdi:waypoint>
+        <omgdi:waypoint x="220.0" y="578.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow35" id="BPMNEdge_flow35">
+        <omgdi:waypoint x="325.0" y="578.0"></omgdi:waypoint>
+        <omgdi:waypoint x="370.0" y="578.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="association1" id="BPMNEdge_association1">
+        <omgdi:waypoint x="700.0" y="120.0"></omgdi:waypoint>
+        <omgdi:waypoint x="692.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="association2" id="BPMNEdge_association2">
+        <omgdi:waypoint x="1020.0" y="130.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1002.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="association3" id="BPMNEdge_association3">
+        <omgdi:waypoint x="1558.0" y="130.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1557.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

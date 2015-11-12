@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.8" icons="true" automaticImage="PNG">  
+  <object id="1" language="java" name="main.java.nl.tue.ieis.get.activiti.ProcessInstanceFunctions" 
+    project="ZK-Activiti" file="/ZK-Activiti/src/main/java/nl/tue/ieis/get/activiti/ProcessInstanceFunctions.java" 
+    binary="false" label="processInstanceFunctions" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="225" y="0"/>  
+  </object>  
+  <object id="2" language="java" name="main.java.nl.tue.ieis.get.control.BannerController" project="ZK-Activiti" 
+    file="/ZK-Activiti/src/main/java/nl/tue/ieis/get/control/BannerController.java" binary="false" 
+    label="bannerController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="361" y="0"/>  
+  </object>  
+  <object id="3" language="java" name="main.java.nl.tue.ieis.get.control.UpdateCaseController" project="ZK-Activiti" 
+    file="/ZK-Activiti/src/main/java/nl/tue/ieis/get/control/UpdateCaseController.java" binary="false" 
+    label="updateCaseController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="474" y="0"/>  
+  </object>  
+  <object id="4" language="java" name="main.java.nl.tue.ieis.get.activiti.InstanceMigration" project="ZK-Activiti" 
+    file="/ZK-Activiti/src/main/java/nl/tue/ieis/get/activiti/InstanceMigration.java" binary="false" 
+    label="instanceMigration" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="601" y="0"/>  
+  </object>
+</sequence-diagram>

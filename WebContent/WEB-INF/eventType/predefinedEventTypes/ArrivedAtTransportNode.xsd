@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ArrivedAtTransportNode.xsd"
+	targetNamespace="ArrivedAtTransportNode.xsd" >
+
+	<xs:element name="ArrivedAtTransportNode">
+		<xs:complexType>
+			<xs:sequence>
+<!-- 				<xs:element name="areaCenter" maxOccurs="1"> -->
+<!-- 					<xs:complexType> -->
+<!-- 						<xs:sequence> -->
+<!-- 							<xs:element name="latitude" type="xs:double" -->
+<!-- 								minOccurs="1" maxOccurs="1" /> -->
+<!-- 							<xs:element name="longitude" type="xs:double" -->
+<!-- 								minOccurs="1" maxOccurs="1" /> -->
+<!-- 							Extend with altitude? -->
+<!-- 						</xs:sequence> -->
+<!-- 					</xs:complexType> -->
+<!-- 				</xs:element> -->
+<!-- 			Use flat structure, nested properties can't be filled -->
+				<xs:element name="latitude" type="xs:double" minOccurs="1" maxOccurs="1" />
+				<xs:element name="longitude" type="xs:double" minOccurs="1" maxOccurs="1" />
+				<xs:element name="nodeId" type="xs:integer" />
+				<xs:element name="nodeName" type="xs:string" />
+<!-- 				Not yet supported by EAP --> 
+<!-- 				 <xs:element name="areaPolygon" maxOccurs="1"> -->
+<!-- 					<xs:complexType> -->
+<!-- 						<xs:sequence> -->
+<!-- 							<xs:element name="coordinate"> -->
+<!-- 								<xs:complexType> -->
+<!-- 									<xs:sequence> -->
+<!-- 										<xs:element name="latitude" type="xs:double" -->
+<!-- 											minOccurs="1" maxOccurs="1" /> -->
+<!-- 										<xs:element name="longitude" type="xs:double" -->
+<!-- 											minOccurs="1" maxOccurs="1" /> -->
+<!-- 										Extend with altitude? -->
+<!-- 									</xs:sequence> -->
+<!-- 								</xs:complexType> -->
+<!-- 							</xs:element> -->
+<!-- 						</xs:sequence> -->
+<!-- 					</xs:complexType> -->
+<!-- 				</xs:element> -->
+				<xs:element name="operatorId" type="xs:integer"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="timestamp" type="xs:dateTime"
+					minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

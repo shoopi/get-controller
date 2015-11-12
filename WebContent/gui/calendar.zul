@@ -1,0 +1,27 @@
+<hlayout id="calSpeed" apply="main.java.nl.tue.ieis.get.control.SpeedDateController">
+	<div hflex="1" id="cal1" style="padding: 5px">
+		<!--  <datebox id="calendar" cols="12" format="long+medium" onCreate="self.value = new Date()" mold="rounded" width="200px"/>-->
+		<label>Start: </label>
+		<timebox id="planTimeBox" constraint="no empty"  cols="12" format="short" mold="rounded" width="90px"/>
+	</div>
+	
+	<div hflex="1" id="cal2" style="padding: 5px">
+		<!--  <datebox id="calendarExecution" cols="12" format="long+medium" onCreate="self.value = new Date()" mold="rounded" width="200px"/> -->
+		<label>Current: </label>
+		<timebox id="curTimeBox" constraint="no empty"  cols="12" format="long" mold="rounded" width="150px"/>
+		<timer id="currentTimeTimer" delay="1000" repeats="true" onCreate="self.start()" />
+	</div>
+	
+	<div hflex="2" id="speed" >
+		Choose Average Speed:
+		<!-- 
+		<selectbox id="speedSelectbox" model="${calSpeed$composer.speedList}">
+			<template name="model">
+               <label value="${each}" />
+           </template>
+    	</selectbox>
+    	-->
+    	<slider id="speedSlider" mold="scale" maxpos="3000" curpos="500" />
+	</div>
+
+</hlayout>
